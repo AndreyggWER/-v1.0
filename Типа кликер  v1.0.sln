@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Типа кликер  v1.0", "Типа кликер  v1.0\Типа кликер  v1.0.csproj", "{B2D0346A-16B9-487A-B51C-61C7FD516FCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2D0346A-16B9-487A-B51C-61C7FD516FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D0346A-16B9-487A-B51C-61C7FD516FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D0346A-16B9-487A-B51C-61C7FD516FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D0346A-16B9-487A-B51C-61C7FD516FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {162F06B3-21C9-46BB-9D5F-92DC0C5927E1}
+	EndGlobalSection
+EndGlobal
