@@ -34,15 +34,17 @@
             this.TextBoxQuart = new System.Windows.Forms.TextBox();
             this.LabelNameBaby = new System.Windows.Forms.Label();
             this.LabelAddSubject = new System.Windows.Forms.Label();
-            this.ButtonCreateFields = new System.Windows.Forms.Button();
-            this.ButtonGO = new System.Windows.Forms.Button();
             this.ButtonDecor = new System.Windows.Forms.Button();
             this.LabelNameSubject = new System.Windows.Forms.Label();
-            this.ButtonTotal = new System.Windows.Forms.Button();
             this.TextBoxNameBaby = new System.Windows.Forms.ComboBox();
             this.ButtonYearPlus = new System.Windows.Forms.Button();
             this.ButtonYearMinus = new System.Windows.Forms.Button();
             this.TextBoxNameSubject = new System.Windows.Forms.ComboBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.ButtonGO = new Типа_кликер__v1._0.RJButton();
+            this.ButtonTotal = new Типа_кликер__v1._0.RJButton();
+            this.ButtonCreateFields = new Типа_кликер__v1._0.RJButton();
             this.SuspendLayout();
             // 
             // TextBoxYear
@@ -99,31 +101,6 @@
             this.LabelAddSubject.Text = "Добавление предмета";
             this.LabelAddSubject.Visible = false;
             // 
-            // ButtonCreateFields
-            // 
-            this.ButtonCreateFields.BackColor = System.Drawing.Color.White;
-            this.ButtonCreateFields.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonCreateFields.Location = new System.Drawing.Point(198, 139);
-            this.ButtonCreateFields.Name = "ButtonCreateFields";
-            this.ButtonCreateFields.Size = new System.Drawing.Size(89, 29);
-            this.ButtonCreateFields.TabIndex = 155;
-            this.ButtonCreateFields.Text = "Создать";
-            this.ButtonCreateFields.UseVisualStyleBackColor = false;
-            this.ButtonCreateFields.Visible = false;
-            this.ButtonCreateFields.Click += new System.EventHandler(this.ButtonCreateFields_Click);
-            // 
-            // ButtonGO
-            // 
-            this.ButtonGO.BackColor = System.Drawing.Color.SlateBlue;
-            this.ButtonGO.ForeColor = System.Drawing.Color.White;
-            this.ButtonGO.Location = new System.Drawing.Point(390, 19);
-            this.ButtonGO.Name = "ButtonGO";
-            this.ButtonGO.Size = new System.Drawing.Size(76, 30);
-            this.ButtonGO.TabIndex = 157;
-            this.ButtonGO.Text = "Поехали";
-            this.ButtonGO.UseVisualStyleBackColor = false;
-            this.ButtonGO.Click += new System.EventHandler(this.ButtonGO_Click);
-            // 
             // ButtonDecor
             // 
             this.ButtonDecor.BackColor = System.Drawing.Color.SlateBlue;
@@ -148,19 +125,6 @@
             this.LabelNameSubject.TabIndex = 159;
             this.LabelNameSubject.Text = "Название";
             this.LabelNameSubject.Visible = false;
-            // 
-            // ButtonTotal
-            // 
-            this.ButtonTotal.BackColor = System.Drawing.Color.White;
-            this.ButtonTotal.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonTotal.Location = new System.Drawing.Point(306, 139);
-            this.ButtonTotal.Name = "ButtonTotal";
-            this.ButtonTotal.Size = new System.Drawing.Size(89, 29);
-            this.ButtonTotal.TabIndex = 160;
-            this.ButtonTotal.Text = "Итог";
-            this.ButtonTotal.UseVisualStyleBackColor = false;
-            this.ButtonTotal.Visible = false;
-            this.ButtonTotal.Click += new System.EventHandler(this.ButtonTotal_Click);
             // 
             // TextBoxNameBaby
             // 
@@ -244,21 +208,77 @@
             this.TextBoxNameSubject.Text = "Алгебра";
             this.TextBoxNameSubject.Visible = false;
             // 
+            // ButtonGO
+            // 
+            this.ButtonGO.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonGO.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonGO.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonGO.BorderRadius = 8;
+            this.ButtonGO.BorderSize = 0;
+            this.ButtonGO.FlatAppearance.BorderSize = 0;
+            this.ButtonGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonGO.ForeColor = System.Drawing.Color.White;
+            this.ButtonGO.Location = new System.Drawing.Point(379, 24);
+            this.ButtonGO.Name = "ButtonGO";
+            this.ButtonGO.Size = new System.Drawing.Size(79, 21);
+            this.ButtonGO.TabIndex = 165;
+            this.ButtonGO.Text = "Поехали";
+            this.ButtonGO.TextColor = System.Drawing.Color.White;
+            this.ButtonGO.UseVisualStyleBackColor = false;
+            // 
+            // ButtonTotal
+            // 
+            this.ButtonTotal.BackColor = System.Drawing.Color.White;
+            this.ButtonTotal.BackgroundColor = System.Drawing.Color.White;
+            this.ButtonTotal.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonTotal.BorderRadius = 8;
+            this.ButtonTotal.BorderSize = 0;
+            this.ButtonTotal.FlatAppearance.BorderSize = 0;
+            this.ButtonTotal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonTotal.ForeColor = System.Drawing.Color.SlateBlue;
+            this.ButtonTotal.Location = new System.Drawing.Point(304, 136);
+            this.ButtonTotal.Name = "ButtonTotal";
+            this.ButtonTotal.Size = new System.Drawing.Size(91, 31);
+            this.ButtonTotal.TabIndex = 166;
+            this.ButtonTotal.Text = "Итог";
+            this.ButtonTotal.TextColor = System.Drawing.Color.SlateBlue;
+            this.ButtonTotal.UseVisualStyleBackColor = false;
+            this.ButtonTotal.Visible = false;
+            // 
+            // ButtonCreateFields
+            // 
+            this.ButtonCreateFields.BackColor = System.Drawing.Color.White;
+            this.ButtonCreateFields.BackgroundColor = System.Drawing.Color.White;
+            this.ButtonCreateFields.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonCreateFields.BorderRadius = 8;
+            this.ButtonCreateFields.BorderSize = 0;
+            this.ButtonCreateFields.FlatAppearance.BorderSize = 0;
+            this.ButtonCreateFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonCreateFields.ForeColor = System.Drawing.Color.SlateBlue;
+            this.ButtonCreateFields.Location = new System.Drawing.Point(196, 136);
+            this.ButtonCreateFields.Name = "ButtonCreateFields";
+            this.ButtonCreateFields.Size = new System.Drawing.Size(91, 31);
+            this.ButtonCreateFields.TabIndex = 167;
+            this.ButtonCreateFields.Text = "Создать";
+            this.ButtonCreateFields.TextColor = System.Drawing.Color.SlateBlue;
+            this.ButtonCreateFields.UseVisualStyleBackColor = false;
+            this.ButtonCreateFields.Visible = false;
+            // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1472, 762);
+            this.Controls.Add(this.ButtonCreateFields);
+            this.Controls.Add(this.ButtonTotal);
+            this.Controls.Add(this.ButtonGO);
             this.Controls.Add(this.TextBoxNameSubject);
             this.Controls.Add(this.ButtonYearMinus);
             this.Controls.Add(this.ButtonYearPlus);
             this.Controls.Add(this.TextBoxNameBaby);
-            this.Controls.Add(this.ButtonTotal);
             this.Controls.Add(this.LabelNameSubject);
-            this.Controls.Add(this.ButtonCreateFields);
             this.Controls.Add(this.LabelAddSubject);
-            this.Controls.Add(this.ButtonGO);
             this.Controls.Add(this.LabelNameBaby);
             this.Controls.Add(this.LabelQuart);
             this.Controls.Add(this.TextBoxQuart);
@@ -279,15 +299,17 @@
         private System.Windows.Forms.TextBox TextBoxQuart;
         private System.Windows.Forms.Label LabelNameBaby;
         private System.Windows.Forms.Label LabelAddSubject;
-        private System.Windows.Forms.Button ButtonCreateFields;
-        private System.Windows.Forms.Button ButtonGO;
         private System.Windows.Forms.Button ButtonDecor;
         private System.Windows.Forms.Label LabelNameSubject;
-        private System.Windows.Forms.Button ButtonTotal;
         private System.Windows.Forms.ComboBox TextBoxNameBaby;
         private System.Windows.Forms.Button ButtonYearPlus;
         private System.Windows.Forms.Button ButtonYearMinus;
         private System.Windows.Forms.ComboBox TextBoxNameSubject;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private RJButton ButtonGO;
+        private RJButton ButtonTotal;
+        private RJButton ButtonCreateFields;
     }
 }
 
