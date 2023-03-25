@@ -34,21 +34,24 @@
             this.TextBoxQuart = new System.Windows.Forms.TextBox();
             this.LabelNameBaby = new System.Windows.Forms.Label();
             this.LabelAddSubject = new System.Windows.Forms.Label();
-            this.TextBoxNameSubject = new System.Windows.Forms.TextBox();
             this.ButtonCreateFields = new System.Windows.Forms.Button();
-            this.TextBoxNameBaby = new System.Windows.Forms.TextBox();
             this.ButtonGO = new System.Windows.Forms.Button();
             this.ButtonDecor = new System.Windows.Forms.Button();
             this.LabelNameSubject = new System.Windows.Forms.Label();
             this.ButtonTotal = new System.Windows.Forms.Button();
+            this.TextBoxNameBaby = new System.Windows.Forms.ComboBox();
+            this.ButtonYearPlus = new System.Windows.Forms.Button();
+            this.ButtonYearMinus = new System.Windows.Forms.Button();
+            this.TextBoxNameSubject = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // TextBoxYear
             // 
-            this.TextBoxYear.Location = new System.Drawing.Point(170, 25);
+            this.TextBoxYear.Location = new System.Drawing.Point(156, 25);
             this.TextBoxYear.Name = "TextBoxYear";
-            this.TextBoxYear.Size = new System.Drawing.Size(88, 20);
+            this.TextBoxYear.Size = new System.Drawing.Size(119, 20);
             this.TextBoxYear.TabIndex = 84;
+            this.TextBoxYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LabelYear
             // 
@@ -96,14 +99,6 @@
             this.LabelAddSubject.Text = "Добавление предмета";
             this.LabelAddSubject.Visible = false;
             // 
-            // TextBoxNameSubject
-            // 
-            this.TextBoxNameSubject.Location = new System.Drawing.Point(12, 143);
-            this.TextBoxNameSubject.Name = "TextBoxNameSubject";
-            this.TextBoxNameSubject.Size = new System.Drawing.Size(164, 20);
-            this.TextBoxNameSubject.TabIndex = 153;
-            this.TextBoxNameSubject.Visible = false;
-            // 
             // ButtonCreateFields
             // 
             this.ButtonCreateFields.BackColor = System.Drawing.Color.White;
@@ -116,13 +111,6 @@
             this.ButtonCreateFields.UseVisualStyleBackColor = false;
             this.ButtonCreateFields.Visible = false;
             this.ButtonCreateFields.Click += new System.EventHandler(this.ButtonCreateFields_Click);
-            // 
-            // TextBoxNameBaby
-            // 
-            this.TextBoxNameBaby.Location = new System.Drawing.Point(15, 25);
-            this.TextBoxNameBaby.Name = "TextBoxNameBaby";
-            this.TextBoxNameBaby.Size = new System.Drawing.Size(120, 20);
-            this.TextBoxNameBaby.TabIndex = 156;
             // 
             // ButtonGO
             // 
@@ -174,19 +162,103 @@
             this.ButtonTotal.Visible = false;
             this.ButtonTotal.Click += new System.EventHandler(this.ButtonTotal_Click);
             // 
+            // TextBoxNameBaby
+            // 
+            this.TextBoxNameBaby.FormattingEnabled = true;
+            this.TextBoxNameBaby.Items.AddRange(new object[] {
+            "Андрей",
+            "Рома",
+            "Света"});
+            this.TextBoxNameBaby.Location = new System.Drawing.Point(12, 24);
+            this.TextBoxNameBaby.Name = "TextBoxNameBaby";
+            this.TextBoxNameBaby.Size = new System.Drawing.Size(120, 21);
+            this.TextBoxNameBaby.TabIndex = 161;
+            this.TextBoxNameBaby.Text = "Андрей";
+            // 
+            // ButtonYearPlus
+            // 
+            this.ButtonYearPlus.BackColor = System.Drawing.Color.White;
+            this.ButtonYearPlus.Location = new System.Drawing.Point(250, 25);
+            this.ButtonYearPlus.Name = "ButtonYearPlus";
+            this.ButtonYearPlus.Size = new System.Drawing.Size(25, 20);
+            this.ButtonYearPlus.TabIndex = 162;
+            this.ButtonYearPlus.Text = "+";
+            this.ButtonYearPlus.UseVisualStyleBackColor = false;
+            this.ButtonYearPlus.Click += new System.EventHandler(this.ButtonYearMinus_Click);
+            // 
+            // ButtonYearMinus
+            // 
+            this.ButtonYearMinus.BackColor = System.Drawing.Color.White;
+            this.ButtonYearMinus.Location = new System.Drawing.Point(156, 24);
+            this.ButtonYearMinus.Name = "ButtonYearMinus";
+            this.ButtonYearMinus.Size = new System.Drawing.Size(25, 21);
+            this.ButtonYearMinus.TabIndex = 163;
+            this.ButtonYearMinus.Text = "-";
+            this.ButtonYearMinus.UseVisualStyleBackColor = false;
+            this.ButtonYearMinus.Click += new System.EventHandler(this.ButtonYearPlus_Click);
+            // 
+            // TextBoxNameSubject
+            // 
+            this.TextBoxNameSubject.FormattingEnabled = true;
+            this.TextBoxNameSubject.Items.AddRange(new object[] {
+            "Чистописание",
+            "Чтение",
+            "Труд",
+            "Природоведение",
+            "Математика",
+            "Музыка, Пение",
+            "Изо",
+            "Русский язык",
+            "Родной язык\t",
+            "Физкультура",
+            "Основы религиозных культур и светской этики\t\t",
+            "Иностранный язык",
+            "Алгебра",
+            "Граждановедение\t",
+            "Краеведение\t",
+            "История",
+            "Литература\t",
+            "Основы безопасности жизнедеятельности (ОБЖ)\t",
+            "Технология\t",
+            "География\t\t",
+            "Биология\t",
+            "Информатик\t",
+            "Обществознание\t",
+            "Черчение\t\t",
+            "Геометрия",
+            "Физика\t",
+            "Химия\t",
+            "Естествознание\t",
+            "Основы экономики\t",
+            "Правоведение\t",
+            "Философия\t",
+            "Экология\t",
+            "Астрономия\t",
+            "Начальная военная подготовка НВП\t",
+            "Мировая художественная культура МХК\t",
+            "Риторика"});
+            this.TextBoxNameSubject.Location = new System.Drawing.Point(12, 142);
+            this.TextBoxNameSubject.Name = "TextBoxNameSubject";
+            this.TextBoxNameSubject.Size = new System.Drawing.Size(164, 21);
+            this.TextBoxNameSubject.TabIndex = 164;
+            this.TextBoxNameSubject.Text = "Алгебра";
+            this.TextBoxNameSubject.Visible = false;
+            // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1472, 762);
+            this.Controls.Add(this.TextBoxNameSubject);
+            this.Controls.Add(this.ButtonYearMinus);
+            this.Controls.Add(this.ButtonYearPlus);
+            this.Controls.Add(this.TextBoxNameBaby);
             this.Controls.Add(this.ButtonTotal);
             this.Controls.Add(this.LabelNameSubject);
             this.Controls.Add(this.ButtonCreateFields);
             this.Controls.Add(this.LabelAddSubject);
-            this.Controls.Add(this.TextBoxNameSubject);
             this.Controls.Add(this.ButtonGO);
-            this.Controls.Add(this.TextBoxNameBaby);
             this.Controls.Add(this.LabelNameBaby);
             this.Controls.Add(this.LabelQuart);
             this.Controls.Add(this.TextBoxQuart);
@@ -207,13 +279,15 @@
         private System.Windows.Forms.TextBox TextBoxQuart;
         private System.Windows.Forms.Label LabelNameBaby;
         private System.Windows.Forms.Label LabelAddSubject;
-        private System.Windows.Forms.TextBox TextBoxNameSubject;
         private System.Windows.Forms.Button ButtonCreateFields;
-        private System.Windows.Forms.TextBox TextBoxNameBaby;
         private System.Windows.Forms.Button ButtonGO;
         private System.Windows.Forms.Button ButtonDecor;
         private System.Windows.Forms.Label LabelNameSubject;
         private System.Windows.Forms.Button ButtonTotal;
+        private System.Windows.Forms.ComboBox TextBoxNameBaby;
+        private System.Windows.Forms.Button ButtonYearPlus;
+        private System.Windows.Forms.Button ButtonYearMinus;
+        private System.Windows.Forms.ComboBox TextBoxNameSubject;
     }
 }
 

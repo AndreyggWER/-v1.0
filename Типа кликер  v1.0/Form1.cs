@@ -18,6 +18,7 @@ namespace Типа_кликер__v1._0
         public Grades_Scoring()
         {
             InitializeComponent();
+            TextBoxYear.Text = DateTime.Now.Year.ToString();
         }
         DB db = new DB();
         int y = 205;
@@ -293,6 +294,16 @@ namespace Типа_кликер__v1._0
             command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = "";
             command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(TotalSum); ;
             command.ExecuteNonQuery();
+        }
+
+        private void ButtonYearPlus_Click(object sender, EventArgs e)
+        {
+            TextBoxYear.Text = Convert.ToString(Convert.ToInt32(TextBoxYear.Text) - 1);
+        }
+
+        private void ButtonYearMinus_Click(object sender, EventArgs e)
+        {
+            TextBoxYear.Text = Convert.ToString(Convert.ToInt32(TextBoxYear.Text) + 1);
         }
     }
 }
