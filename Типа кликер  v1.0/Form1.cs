@@ -146,18 +146,18 @@ namespace Типа_кликер__v1._0
                 Name = "Lc" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
-                Size = new Size(160, 13),
+                Size = new Size(700, 13),
             };
             Controls.Add(LabelCreate1);
             Label LabelCreate2 = new Label()
             {
                 Text = "",
-                Location = new Point(830, y + 5),
+                Location = new Point(1200, y + 5),
                 TabIndex = 12,
                 Name = "Lctwo" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
-                Size = new Size(160, 13),
+                Size = new Size(60, 13),
             };
             Controls.Add(LabelCreate2);
         }
@@ -256,16 +256,17 @@ namespace Типа_кликер__v1._0
                     }
                 }
             }
-            Label LabelCreate = new Label()
+            Label LabelCreated = new Label()
             {
                 Text = "",
-                Location = new Point(830, y + 5),
+                Location = new Point(1200, y + 5),
                 TabIndex = 12,
-                Name = "Lctwo" + i,
+                Name = "Lctwod" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
-                Size = new Size(160, 13),
+                Size = new Size(60, 13),
             };
+            Controls.Add(LabelCreated);
             Button ButtonCreate = new Button()
             {
                 Text = "Сохранить",
@@ -278,11 +279,12 @@ namespace Типа_кликер__v1._0
             };
             Controls.Add(ButtonCreate);
             ButtonCreate.Click += new EventHandler(ButtonCreate_Click);
-            Controls.Add(LabelCreate);
-            LabelCre2.Text = Convert.ToString(TotalSum);
+            Label LabelCred = (System.Windows.Forms.Label)this.Controls.Find("Lctwod" + i, true)[0];
+            LabelCred.Text = Convert.ToString(TotalSum);
         }
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
+            db.OpenC();
             MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", db.getConnection());
             command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
             command.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
