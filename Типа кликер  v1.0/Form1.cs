@@ -25,36 +25,36 @@ namespace Типа_кликер__v1._0
         int id = -1;
         int Oc(string s)
         {
-            int sum = 0;
+            int Sum = 0;
             string[] subs = s.Split(' ');
             foreach (var sub in subs)
             {
 
-                string ocenka = sub;
-                int koef = 1;
+                string Grade = sub;
+                int Koef = 1;
 
                 if (sub.IndexOf("*") > 0)
                 {
                     string[] number1 = sub.Split('*');
-                    ocenka = number1[0];
-                    koef = Convert.ToInt32(number1[1]);
+                    Grade = number1[0];
+                    Koef = Convert.ToInt32(number1[1]);
                 }
 
-                if (ocenka == "5")
+                if (Grade == "5")
                 {
-                    sum += 20 * koef;
+                    Sum += 20 * Koef;
                 }
-                if (ocenka == "4")
+                if (Grade == "4")
                 {
-                    sum += 4 * koef;
+                    Sum += 4 * Koef;
                 }
-                if (ocenka == "2")
+                if (Grade == "2")
                 {
-                    sum -= 100 * koef;
+                    Sum -= 100 * Koef;
                 }
             }
-            total += sum;
-            return sum;
+            total += Sum;
+            return Sum;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -71,16 +71,14 @@ namespace Типа_кликер__v1._0
                 Name = "l" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
-                Size = new Size(109, 13)
-            };
+                Size = new Size(109, 13),};
             Controls.Add(labelGenerate);
             System.Windows.Forms.TextBox textBoxGenerate = new System.Windows.Forms.TextBox()
             {
 
                 Location = new Point(250, y + 18),
                 TabIndex = 10,
-                Name = "t" + i,
-            };
+                Name = "t" + i,};
             Controls.Add(textBoxGenerate);
             Button ButtonGenerate = new Button()
             {
@@ -92,13 +90,11 @@ namespace Типа_кликер__v1._0
             ButtonGenerate.Click += new EventHandler(ButtonGenerate_Click);
             Controls.Add(ButtonGenerate);
         }
-
         private void ButtonGenerate_Click(object sender, EventArgs e)
         {
             id += 1;
             System.Windows.Forms.TextBox chislo = (System.Windows.Forms.TextBox)this.Controls.Find("t" + i, true)[0];
             System.Windows.Forms.Label nadpis = (System.Windows.Forms.Label)this.Controls.Find("l" + i, true)[0];
-
             db.OpenC();
             string AAAAAAA = TextBoxYear.Text;
             string AAAAAA = TextBoxQuart.Text;
