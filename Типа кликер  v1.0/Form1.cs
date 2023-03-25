@@ -96,21 +96,13 @@ namespace Типа_кликер__v1._0
             System.Windows.Forms.TextBox chislo = (System.Windows.Forms.TextBox)this.Controls.Find("t" + i, true)[0];
             System.Windows.Forms.Label nadpis = (System.Windows.Forms.Label)this.Controls.Find("l" + i, true)[0];
             db.OpenC();
-            string AAAAAAA = TextBoxYear.Text;
-            string AAAAAA = TextBoxQuart.Text;
-            string AAAAA = TextBoxNameBaby.Text;
-            string AAAA = nadpis.Text;
-            string AAA = chislo.Text;
-            string AA = Convert.ToString(Oc(chislo.Text));
-            int A = id + 1;
-            MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`code`, `year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@A, @AAAAAAA, @AAAAAA, @AAAAA, @AAAA, @AAA, @AA)", db.getConnection());
-            command.Parameters.Add("@AAAAAAA", MySqlDbType.VarChar).Value = AAAAAAA;
-            command.Parameters.Add("@AAAAAA", MySqlDbType.VarChar).Value = AAAAAA;
-            command.Parameters.Add("@AAAAA", MySqlDbType.VarChar).Value = AAAAA;
-            command.Parameters.Add("@AAAA", MySqlDbType.VarChar).Value = AAAA;
-            command.Parameters.Add("@AAA", MySqlDbType.VarChar).Value = AAA;
-            command.Parameters.Add("@AA", MySqlDbType.VarChar).Value = AA;
-            command.Parameters.Add("@A", MySqlDbType.VarChar).Value = A;
+            MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", db.getConnection());
+            command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
+            command.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
+            command.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
+            command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = nadpis.Text;
+            command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = chislo.Text;
+            command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(chislo.Text)); ;
             command.ExecuteNonQuery();
         }
     }
