@@ -208,7 +208,7 @@ namespace Типа_кликер__v1._0
                 Label LabelGenerate = new Label()
                 {
                     Text = Convert.ToInt32(i - 1) + "  предмет",
-                    Location = new Point(180, y),
+                    Location = new Point(180, y + 8),
                     TabIndex = 11,
                     Name = "Lc" + i,
                     Font = new Font("Microsoft Sans Serif", 8),
