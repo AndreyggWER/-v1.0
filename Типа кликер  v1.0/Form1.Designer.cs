@@ -42,9 +42,11 @@
             this.TextBoxNameSubject = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.ButtonGO = new Типа_кликер__v1._0.RJButton();
-            this.ButtonTotal = new Типа_кликер__v1._0.RJButton();
             this.ButtonCreateFields = new Типа_кликер__v1._0.RJButton();
+            this.ButtonTotal = new Типа_кликер__v1._0.RJButton();
+            this.ButtonGO = new Типа_кликер__v1._0.RJButton();
+            this.ButtonQuartPlus = new System.Windows.Forms.Button();
+            this.ButtonQuartMinus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextBoxYear
@@ -77,8 +79,9 @@
             // 
             this.TextBoxQuart.Location = new System.Drawing.Point(294, 25);
             this.TextBoxQuart.Name = "TextBoxQuart";
-            this.TextBoxQuart.Size = new System.Drawing.Size(68, 20);
+            this.TextBoxQuart.Size = new System.Drawing.Size(108, 20);
             this.TextBoxQuart.TabIndex = 86;
+            this.TextBoxQuart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LabelNameBaby
             // 
@@ -208,23 +211,25 @@
             this.TextBoxNameSubject.Text = "Алгебра";
             this.TextBoxNameSubject.Visible = false;
             // 
-            // ButtonGO
+            // ButtonCreateFields
             // 
-            this.ButtonGO.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.ButtonGO.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
-            this.ButtonGO.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.ButtonGO.BorderRadius = 8;
-            this.ButtonGO.BorderSize = 0;
-            this.ButtonGO.FlatAppearance.BorderSize = 0;
-            this.ButtonGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonGO.ForeColor = System.Drawing.Color.White;
-            this.ButtonGO.Location = new System.Drawing.Point(379, 24);
-            this.ButtonGO.Name = "ButtonGO";
-            this.ButtonGO.Size = new System.Drawing.Size(79, 21);
-            this.ButtonGO.TabIndex = 165;
-            this.ButtonGO.Text = "Поехали";
-            this.ButtonGO.TextColor = System.Drawing.Color.White;
-            this.ButtonGO.UseVisualStyleBackColor = false;
+            this.ButtonCreateFields.BackColor = System.Drawing.Color.White;
+            this.ButtonCreateFields.BackgroundColor = System.Drawing.Color.White;
+            this.ButtonCreateFields.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonCreateFields.BorderRadius = 8;
+            this.ButtonCreateFields.BorderSize = 0;
+            this.ButtonCreateFields.FlatAppearance.BorderSize = 0;
+            this.ButtonCreateFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonCreateFields.ForeColor = System.Drawing.Color.SlateBlue;
+            this.ButtonCreateFields.Location = new System.Drawing.Point(196, 136);
+            this.ButtonCreateFields.Name = "ButtonCreateFields";
+            this.ButtonCreateFields.Size = new System.Drawing.Size(91, 31);
+            this.ButtonCreateFields.TabIndex = 167;
+            this.ButtonCreateFields.Text = "Создать";
+            this.ButtonCreateFields.TextColor = System.Drawing.Color.SlateBlue;
+            this.ButtonCreateFields.UseVisualStyleBackColor = false;
+            this.ButtonCreateFields.Visible = false;
+            this.ButtonCreateFields.Click += new System.EventHandler(this.ButtonCreateFields_Click_1);
             // 
             // ButtonTotal
             // 
@@ -244,32 +249,57 @@
             this.ButtonTotal.TextColor = System.Drawing.Color.SlateBlue;
             this.ButtonTotal.UseVisualStyleBackColor = false;
             this.ButtonTotal.Visible = false;
+            this.ButtonTotal.Click += new System.EventHandler(this.ButtonTotal_Click_1);
             // 
-            // ButtonCreateFields
+            // ButtonGO
             // 
-            this.ButtonCreateFields.BackColor = System.Drawing.Color.White;
-            this.ButtonCreateFields.BackgroundColor = System.Drawing.Color.White;
-            this.ButtonCreateFields.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.ButtonCreateFields.BorderRadius = 8;
-            this.ButtonCreateFields.BorderSize = 0;
-            this.ButtonCreateFields.FlatAppearance.BorderSize = 0;
-            this.ButtonCreateFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonCreateFields.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonCreateFields.Location = new System.Drawing.Point(196, 136);
-            this.ButtonCreateFields.Name = "ButtonCreateFields";
-            this.ButtonCreateFields.Size = new System.Drawing.Size(91, 31);
-            this.ButtonCreateFields.TabIndex = 167;
-            this.ButtonCreateFields.Text = "Создать";
-            this.ButtonCreateFields.TextColor = System.Drawing.Color.SlateBlue;
-            this.ButtonCreateFields.UseVisualStyleBackColor = false;
-            this.ButtonCreateFields.Visible = false;
+            this.ButtonGO.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonGO.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonGO.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonGO.BorderRadius = 8;
+            this.ButtonGO.BorderSize = 0;
+            this.ButtonGO.FlatAppearance.BorderSize = 0;
+            this.ButtonGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonGO.ForeColor = System.Drawing.Color.White;
+            this.ButtonGO.Location = new System.Drawing.Point(408, 24);
+            this.ButtonGO.Name = "ButtonGO";
+            this.ButtonGO.Size = new System.Drawing.Size(79, 21);
+            this.ButtonGO.TabIndex = 165;
+            this.ButtonGO.Text = "Поехали";
+            this.ButtonGO.TextColor = System.Drawing.Color.White;
+            this.ButtonGO.UseVisualStyleBackColor = false;
+            this.ButtonGO.Click += new System.EventHandler(this.ButtonGO_Click_1);
+            // 
+            // ButtonQuartPlus
+            // 
+            this.ButtonQuartPlus.BackColor = System.Drawing.Color.White;
+            this.ButtonQuartPlus.Location = new System.Drawing.Point(377, 25);
+            this.ButtonQuartPlus.Name = "ButtonQuartPlus";
+            this.ButtonQuartPlus.Size = new System.Drawing.Size(25, 20);
+            this.ButtonQuartPlus.TabIndex = 168;
+            this.ButtonQuartPlus.Text = "+";
+            this.ButtonQuartPlus.UseVisualStyleBackColor = false;
+            this.ButtonQuartPlus.Click += new System.EventHandler(this.ButtonQuartMinus_Click);
+            // 
+            // ButtonQuartMinus
+            // 
+            this.ButtonQuartMinus.BackColor = System.Drawing.Color.White;
+            this.ButtonQuartMinus.Location = new System.Drawing.Point(294, 25);
+            this.ButtonQuartMinus.Name = "ButtonQuartMinus";
+            this.ButtonQuartMinus.Size = new System.Drawing.Size(25, 21);
+            this.ButtonQuartMinus.TabIndex = 169;
+            this.ButtonQuartMinus.Text = "-";
+            this.ButtonQuartMinus.UseVisualStyleBackColor = false;
+            this.ButtonQuartMinus.Click += new System.EventHandler(this.ButtonQuartPlus_Click);
             // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1472, 762);
+            this.ClientSize = new System.Drawing.Size(1472, 779);
+            this.Controls.Add(this.ButtonQuartMinus);
+            this.Controls.Add(this.ButtonQuartPlus);
             this.Controls.Add(this.ButtonCreateFields);
             this.Controls.Add(this.ButtonTotal);
             this.Controls.Add(this.ButtonGO);
@@ -310,6 +340,8 @@
         private RJButton ButtonGO;
         private RJButton ButtonTotal;
         private RJButton ButtonCreateFields;
+        private System.Windows.Forms.Button ButtonQuartPlus;
+        private System.Windows.Forms.Button ButtonQuartMinus;
     }
 }
 

@@ -19,6 +19,7 @@ namespace Типа_кликер__v1._0
         {
             InitializeComponent();
             TextBoxYear.Text = DateTime.Now.Year.ToString();
+            TextBoxQuart.Text = "1";
         }
         DB db = new DB();
         int y = 205;
@@ -102,7 +103,7 @@ namespace Типа_кликер__v1._0
             }
             return MainSum;
         }
-        private void ButtonCreateFields_Click(object sender, EventArgs e)
+        private void ButtonCreateFields_Click_1(object sender, EventArgs e)
         {
             Name_subject = Convert.ToString(TextBoxNameSubject.Text);
             TextBoxNameSubject.Text = "";
@@ -183,17 +184,8 @@ namespace Типа_кликер__v1._0
             command.ExecuteNonQuery();
         }
 
-        private void ButtonGO_Click(object sender, EventArgs e)
-        {
-            LabelAddSubject.Visible = true;
-            TextBoxNameSubject.Visible = true;
-            ButtonCreateFields.Visible = true;
-            ButtonDecor.Visible = true;
-            LabelNameSubject.Visible = true;
-            ButtonTotal.Visible = true;
-        }
 
-        private void ButtonTotal_Click(object sender, EventArgs e)
+        private void ButtonTotal_Click_1(object sender, EventArgs e)
         {
             ButtonTotal.Visible = false;
             y += 90;
@@ -304,6 +296,32 @@ namespace Типа_кликер__v1._0
         private void ButtonYearMinus_Click(object sender, EventArgs e)
         {
             TextBoxYear.Text = Convert.ToString(Convert.ToInt32(TextBoxYear.Text) + 1);
+        }
+
+        private void ButtonGO_Click_1(object sender, EventArgs e)
+        {
+            LabelAddSubject.Visible = true;
+            TextBoxNameSubject.Visible = true;
+            ButtonCreateFields.Visible = true;
+            ButtonDecor.Visible = true;
+            LabelNameSubject.Visible = true;
+            ButtonTotal.Visible = true;
+        }
+
+        private void ButtonQuartMinus_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(TextBoxQuart.Text) <= 3)
+            {
+                TextBoxQuart.Text = Convert.ToString(Convert.ToInt32(TextBoxQuart.Text) + 1);
+            }
+        }
+
+        private void ButtonQuartPlus_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(TextBoxQuart.Text) >= 2)
+            {
+                TextBoxQuart.Text = Convert.ToString(Convert.ToInt32(TextBoxQuart.Text) - 1);
+            }
         }
     }
 }
