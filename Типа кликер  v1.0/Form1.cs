@@ -22,7 +22,7 @@ namespace Типа_кликер__v1._0
             TextBoxQuart.Text = "1";
         }
         DB db = new DB();
-        int y = 205;
+        int y = 160;
         int i = 0;
         TextBox Number = new TextBox();
         Label LabelGen = new Label();
@@ -107,13 +107,14 @@ namespace Типа_кликер__v1._0
         {
             Name_subject = Convert.ToString(TextBoxNameSubject.Text);
             TextBoxNameSubject.Text = "";
-            y += 90;
+            y += 60;
             i += 1;
             Label LabelGenerate = new Label()
             {
                 Text = "" + Name_subject,
                 Location = new Point(20, y + 5),
                 TabIndex = 10,
+                TextAlign = ContentAlignment.TopCenter,
                 Name = "Lg" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
@@ -125,6 +126,7 @@ namespace Типа_кликер__v1._0
 
                 Location = new Point(180, y),
                 TabIndex = 10,
+                Font = new Font("Microsoft Sans Serif", 12),
                 Name = "Tg" + i,
             };
             Controls.Add(textBoxGenerate);
@@ -143,18 +145,17 @@ namespace Типа_кликер__v1._0
             Label LabelCreate1 = new Label()
             {
                 Text = "",
-                Location = new Point(400, y + 5),
+                Location = new Point(400, y + 8),
                 TabIndex = 11,
                 Name = "Lc" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
-                AutoSize = false,
-                Size = new Size(700, 13),
+                AutoSize = true
             };
             Controls.Add(LabelCreate1);
             Label LabelCreate2 = new Label()
             {
                 Text = "",
-                Location = new Point(1200, y + 5),
+                Location = new Point(1200, y + 8),
                 TabIndex = 12,
                 Name = "Lctwo" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
@@ -188,13 +189,14 @@ namespace Типа_кликер__v1._0
         private void ButtonTotal_Click_1(object sender, EventArgs e)
         {
             ButtonTotal.Visible = false;
-            y += 90;
+            y += 60;
             i += 1;
             Label LabelGen = new Label()
             {
                 Text = "ИТОГО: ",
                 Location = new Point(20, y + 5),
                 TabIndex = 10,
+                TextAlign = ContentAlignment.TopCenter,
                 Name = "Lg" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
@@ -252,7 +254,7 @@ namespace Типа_кликер__v1._0
             Label LabelCreated = new Label()
             {
                 Text = "",
-                Location = new Point(1200, y + 5),
+                Location = new Point(1200, y + 8),
                 TabIndex = 12,
                 Name = "Lctwod" + i,
                 Font = new Font("Microsoft Sans Serif", 8),

@@ -42,18 +42,19 @@
             this.TextBoxNameSubject = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.ButtonQuartPlus = new System.Windows.Forms.Button();
+            this.ButtonQuartMinus = new System.Windows.Forms.Button();
             this.ButtonCreateFields = new Типа_кликер__v1._0.RJButton();
             this.ButtonTotal = new Типа_кликер__v1._0.RJButton();
             this.ButtonGO = new Типа_кликер__v1._0.RJButton();
-            this.ButtonQuartPlus = new System.Windows.Forms.Button();
-            this.ButtonQuartMinus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextBoxYear
             // 
+            this.TextBoxYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TextBoxYear.Location = new System.Drawing.Point(156, 25);
             this.TextBoxYear.Name = "TextBoxYear";
-            this.TextBoxYear.Size = new System.Drawing.Size(119, 20);
+            this.TextBoxYear.Size = new System.Drawing.Size(119, 26);
             this.TextBoxYear.TabIndex = 84;
             this.TextBoxYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -77,9 +78,10 @@
             // 
             // TextBoxQuart
             // 
+            this.TextBoxQuart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TextBoxQuart.Location = new System.Drawing.Point(294, 25);
             this.TextBoxQuart.Name = "TextBoxQuart";
-            this.TextBoxQuart.Size = new System.Drawing.Size(108, 20);
+            this.TextBoxQuart.Size = new System.Drawing.Size(108, 26);
             this.TextBoxQuart.TabIndex = 86;
             this.TextBoxQuart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -112,7 +114,7 @@
             this.ButtonDecor.ForeColor = System.Drawing.Color.White;
             this.ButtonDecor.Location = new System.Drawing.Point(-2, 61);
             this.ButtonDecor.Name = "ButtonDecor";
-            this.ButtonDecor.Size = new System.Drawing.Size(1843, 185);
+            this.ButtonDecor.Size = new System.Drawing.Size(1843, 141);
             this.ButtonDecor.TabIndex = 158;
             this.ButtonDecor.UseVisualStyleBackColor = false;
             this.ButtonDecor.Visible = false;
@@ -131,6 +133,7 @@
             // 
             // TextBoxNameBaby
             // 
+            this.TextBoxNameBaby.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TextBoxNameBaby.FormattingEnabled = true;
             this.TextBoxNameBaby.Items.AddRange(new object[] {
             "Андрей",
@@ -138,7 +141,7 @@
             "Света"});
             this.TextBoxNameBaby.Location = new System.Drawing.Point(12, 24);
             this.TextBoxNameBaby.Name = "TextBoxNameBaby";
-            this.TextBoxNameBaby.Size = new System.Drawing.Size(120, 21);
+            this.TextBoxNameBaby.Size = new System.Drawing.Size(120, 28);
             this.TextBoxNameBaby.TabIndex = 161;
             this.TextBoxNameBaby.Text = "Андрей";
             // 
@@ -147,7 +150,7 @@
             this.ButtonYearPlus.BackColor = System.Drawing.Color.White;
             this.ButtonYearPlus.Location = new System.Drawing.Point(250, 25);
             this.ButtonYearPlus.Name = "ButtonYearPlus";
-            this.ButtonYearPlus.Size = new System.Drawing.Size(25, 20);
+            this.ButtonYearPlus.Size = new System.Drawing.Size(25, 26);
             this.ButtonYearPlus.TabIndex = 162;
             this.ButtonYearPlus.Text = "+";
             this.ButtonYearPlus.UseVisualStyleBackColor = false;
@@ -158,7 +161,7 @@
             this.ButtonYearMinus.BackColor = System.Drawing.Color.White;
             this.ButtonYearMinus.Location = new System.Drawing.Point(156, 24);
             this.ButtonYearMinus.Name = "ButtonYearMinus";
-            this.ButtonYearMinus.Size = new System.Drawing.Size(25, 21);
+            this.ButtonYearMinus.Size = new System.Drawing.Size(25, 27);
             this.ButtonYearMinus.TabIndex = 163;
             this.ButtonYearMinus.Text = "-";
             this.ButtonYearMinus.UseVisualStyleBackColor = false;
@@ -166,6 +169,7 @@
             // 
             // TextBoxNameSubject
             // 
+            this.TextBoxNameSubject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TextBoxNameSubject.FormattingEnabled = true;
             this.TextBoxNameSubject.Items.AddRange(new object[] {
             "Чистописание",
@@ -176,54 +180,76 @@
             "Музыка, Пение",
             "Изо",
             "Русский язык",
-            "Родной язык\t",
+            "Родной язык",
             "Физкультура",
-            "Основы религиозных культур и светской этики\t\t",
+            "Основы религиозных культур и светской этики",
             "Иностранный язык",
             "Алгебра",
-            "Граждановедение\t",
-            "Краеведение\t",
+            "Граждановедение",
+            "Краеведение",
             "История",
-            "Литература\t",
+            "Литература",
             "Основы безопасности жизнедеятельности (ОБЖ)\t",
-            "Технология\t",
-            "География\t\t",
+            "Технология",
+            "География",
             "Биология\t",
-            "Информатик\t",
+            "Информатик",
             "Обществознание\t",
-            "Черчение\t\t",
+            "Черчение\t",
             "Геометрия",
-            "Физика\t",
-            "Химия\t",
-            "Естествознание\t",
+            "Физика",
+            "Химия",
+            "Естествознание",
             "Основы экономики\t",
-            "Правоведение\t",
-            "Философия\t",
+            "Правоведение",
+            "Философия",
             "Экология\t",
-            "Астрономия\t",
+            "Астрономия",
             "Начальная военная подготовка НВП\t",
             "Мировая художественная культура МХК\t",
             "Риторика"});
-            this.TextBoxNameSubject.Location = new System.Drawing.Point(12, 142);
+            this.TextBoxNameSubject.Location = new System.Drawing.Point(12, 138);
             this.TextBoxNameSubject.Name = "TextBoxNameSubject";
-            this.TextBoxNameSubject.Size = new System.Drawing.Size(164, 21);
+            this.TextBoxNameSubject.Size = new System.Drawing.Size(164, 28);
             this.TextBoxNameSubject.TabIndex = 164;
             this.TextBoxNameSubject.Text = "Алгебра";
             this.TextBoxNameSubject.Visible = false;
+            // 
+            // ButtonQuartPlus
+            // 
+            this.ButtonQuartPlus.BackColor = System.Drawing.Color.White;
+            this.ButtonQuartPlus.Location = new System.Drawing.Point(377, 25);
+            this.ButtonQuartPlus.Name = "ButtonQuartPlus";
+            this.ButtonQuartPlus.Size = new System.Drawing.Size(25, 27);
+            this.ButtonQuartPlus.TabIndex = 168;
+            this.ButtonQuartPlus.Text = "+";
+            this.ButtonQuartPlus.UseVisualStyleBackColor = false;
+            this.ButtonQuartPlus.Click += new System.EventHandler(this.ButtonQuartMinus_Click);
+            // 
+            // ButtonQuartMinus
+            // 
+            this.ButtonQuartMinus.BackColor = System.Drawing.Color.White;
+            this.ButtonQuartMinus.Location = new System.Drawing.Point(294, 25);
+            this.ButtonQuartMinus.Name = "ButtonQuartMinus";
+            this.ButtonQuartMinus.Size = new System.Drawing.Size(25, 27);
+            this.ButtonQuartMinus.TabIndex = 169;
+            this.ButtonQuartMinus.Text = "-";
+            this.ButtonQuartMinus.UseVisualStyleBackColor = false;
+            this.ButtonQuartMinus.Click += new System.EventHandler(this.ButtonQuartPlus_Click);
             // 
             // ButtonCreateFields
             // 
             this.ButtonCreateFields.BackColor = System.Drawing.Color.White;
             this.ButtonCreateFields.BackgroundColor = System.Drawing.Color.White;
             this.ButtonCreateFields.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.ButtonCreateFields.BorderRadius = 8;
+            this.ButtonCreateFields.BorderRadius = 12;
             this.ButtonCreateFields.BorderSize = 0;
             this.ButtonCreateFields.FlatAppearance.BorderSize = 0;
             this.ButtonCreateFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonCreateFields.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonCreateFields.Location = new System.Drawing.Point(196, 136);
+            this.ButtonCreateFields.Location = new System.Drawing.Point(196, 138);
             this.ButtonCreateFields.Name = "ButtonCreateFields";
-            this.ButtonCreateFields.Size = new System.Drawing.Size(91, 31);
+            this.ButtonCreateFields.Size = new System.Drawing.Size(60, 29);
             this.ButtonCreateFields.TabIndex = 167;
             this.ButtonCreateFields.Text = "Создать";
             this.ButtonCreateFields.TextColor = System.Drawing.Color.SlateBlue;
@@ -236,14 +262,14 @@
             this.ButtonTotal.BackColor = System.Drawing.Color.White;
             this.ButtonTotal.BackgroundColor = System.Drawing.Color.White;
             this.ButtonTotal.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.ButtonTotal.BorderRadius = 8;
+            this.ButtonTotal.BorderRadius = 12;
             this.ButtonTotal.BorderSize = 0;
             this.ButtonTotal.FlatAppearance.BorderSize = 0;
             this.ButtonTotal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonTotal.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonTotal.Location = new System.Drawing.Point(304, 136);
+            this.ButtonTotal.Location = new System.Drawing.Point(275, 138);
             this.ButtonTotal.Name = "ButtonTotal";
-            this.ButtonTotal.Size = new System.Drawing.Size(91, 31);
+            this.ButtonTotal.Size = new System.Drawing.Size(60, 29);
             this.ButtonTotal.TabIndex = 166;
             this.ButtonTotal.Text = "Итог";
             this.ButtonTotal.TextColor = System.Drawing.Color.SlateBlue;
@@ -261,7 +287,7 @@
             this.ButtonGO.FlatAppearance.BorderSize = 0;
             this.ButtonGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonGO.ForeColor = System.Drawing.Color.White;
-            this.ButtonGO.Location = new System.Drawing.Point(408, 24);
+            this.ButtonGO.Location = new System.Drawing.Point(408, 27);
             this.ButtonGO.Name = "ButtonGO";
             this.ButtonGO.Size = new System.Drawing.Size(79, 21);
             this.ButtonGO.TabIndex = 165;
@@ -270,34 +296,12 @@
             this.ButtonGO.UseVisualStyleBackColor = false;
             this.ButtonGO.Click += new System.EventHandler(this.ButtonGO_Click_1);
             // 
-            // ButtonQuartPlus
-            // 
-            this.ButtonQuartPlus.BackColor = System.Drawing.Color.White;
-            this.ButtonQuartPlus.Location = new System.Drawing.Point(377, 25);
-            this.ButtonQuartPlus.Name = "ButtonQuartPlus";
-            this.ButtonQuartPlus.Size = new System.Drawing.Size(25, 20);
-            this.ButtonQuartPlus.TabIndex = 168;
-            this.ButtonQuartPlus.Text = "+";
-            this.ButtonQuartPlus.UseVisualStyleBackColor = false;
-            this.ButtonQuartPlus.Click += new System.EventHandler(this.ButtonQuartMinus_Click);
-            // 
-            // ButtonQuartMinus
-            // 
-            this.ButtonQuartMinus.BackColor = System.Drawing.Color.White;
-            this.ButtonQuartMinus.Location = new System.Drawing.Point(294, 25);
-            this.ButtonQuartMinus.Name = "ButtonQuartMinus";
-            this.ButtonQuartMinus.Size = new System.Drawing.Size(25, 21);
-            this.ButtonQuartMinus.TabIndex = 169;
-            this.ButtonQuartMinus.Text = "-";
-            this.ButtonQuartMinus.UseVisualStyleBackColor = false;
-            this.ButtonQuartMinus.Click += new System.EventHandler(this.ButtonQuartPlus_Click);
-            // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1472, 779);
+            this.ClientSize = new System.Drawing.Size(1472, 983);
             this.Controls.Add(this.ButtonQuartMinus);
             this.Controls.Add(this.ButtonQuartPlus);
             this.Controls.Add(this.ButtonCreateFields);
