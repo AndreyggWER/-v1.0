@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,19 +23,18 @@ namespace Типа_кликер__v1._0
             TextBoxQuart.Text = "1";
         }
         DB db = new DB();
-        int y = 160;
+        int y = 178;
         int i = 0;
         TextBox Number = new TextBox();
         Label LabelGen = new Label();
         Label LabelCre = new Label();
         Label LabelCre2 = new Label();
+        int TotalOcGradeSum = 0;
         int id = -1;
         int TotalSum = 0;
         string Name_subject = "";
         int Oc(string s)
-        {
-            int total = 0;
-            int Sum = 0;
+        {            int Sum = 0;
             string[] subs = s.Split(' ');
             foreach (var sub in subs)
             {
@@ -46,7 +46,14 @@ namespace Типа_кликер__v1._0
                 {
                     string[] number1 = sub.Split('*');
                     Grade = number1[0];
-                    Koef = Convert.ToInt32(number1[1]);
+                    try
+                    {
+                        Koef = Convert.ToInt32(number1[1]);
+                    }
+                    catch (Exception)
+                    {
+                        Koef = 1;
+                    }
                 }
 
                 if (Grade == "5")
@@ -59,10 +66,9 @@ namespace Типа_кликер__v1._0
                 }
                 if (Grade == "2")
                 {
-                    Sum -= 100 * Koef;
+                    Sum += -100 * Koef;
                 }
             }
-            total += Sum;
             return Sum;
         }
         string Ocgrade(string s)
@@ -80,26 +86,34 @@ namespace Типа_кликер__v1._0
                 {
                     string[] number1 = sub.Split('*');
                     Grade = number1[0];
-                    Koef = Convert.ToInt32(number1[1]);
+                    try
+                    {
+                        Koef = Convert.ToInt32(number1[1]);
+                    }
+                    catch (Exception )
+                    {
+                        // recover from exception
+                        Koef = 1;
+                    }
                 }
 
                 if (Grade == "5")
                 {
-                    Sum = "30 * " + Koef + " + ";
+                    Sum += "30 * " + Koef + " + ";
                 }
                 if (Grade == "4")
                 {
-                    Sum = "4 * " + Koef + " + ";
+                    Sum += "4 * " + Koef + " + ";
                 }
                 if (Grade == "3")
                 {
-                    Sum = "0 * " + Koef + " + ";
+                    Sum += "0 * " + Koef + " + ";
                 }
                 if (Grade == "2")
                 {
-                    Sum = "-100 * " + Koef + " + ";
+                    Sum += "-100 * " + Koef + " + ";
                 }
-                MainSum += Sum;
+                MainSum = Sum;
             }
             return MainSum;
         }
@@ -107,14 +121,13 @@ namespace Типа_кликер__v1._0
         {
             Name_subject = Convert.ToString(TextBoxNameSubject.Text);
             TextBoxNameSubject.Text = "";
-            y += 60;
+            y += 42;
             i += 1;
             Label LabelGenerate = new Label()
             {
                 Text = "" + Name_subject,
                 Location = new Point(20, y + 5),
                 TabIndex = 10,
-                TextAlign = ContentAlignment.TopCenter,
                 Name = "Lg" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
@@ -129,19 +142,10 @@ namespace Типа_кликер__v1._0
                 Font = new Font("Microsoft Sans Serif", 12),
                 Name = "Tg" + i,
             };
+            textBoxGenerate.TextChanged += new EventHandler(textBoxGenerate_TextChanged);
+            textBoxGenerate.KeyDown += new KeyEventHandler(textBoxGenerate_KeyDown);
+
             Controls.Add(textBoxGenerate);
-            Button ButtonGenerate = new Button()
-            {
-                Text = "подсчитать",
-                Location = new Point(320, y),
-                TabIndex = 8,
-                Name = "B" + i,
-                BackColor = Color.SlateBlue,
-                Size = new Size(76, 30),
-                ForeColor = Color.White
-            };
-            ButtonGenerate.Click += new EventHandler(ButtonGenerate_Click);
-            Controls.Add(ButtonGenerate);
             Label LabelCreate1 = new Label()
             {
                 Text = "",
@@ -164,39 +168,35 @@ namespace Типа_кликер__v1._0
             };
             Controls.Add(LabelCreate2);
         }
-        private void ButtonGenerate_Click(object sender, EventArgs e)
+        private void textBoxGenerate_TextChanged(object sender, EventArgs e)
         {
             id += 1;
             Number = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + i, true)[0];
             LabelGen = (System.Windows.Forms.Label)this.Controls.Find("Lg" + i, true)[0];
             LabelCre = (System.Windows.Forms.Label)this.Controls.Find("Lc" + i, true)[0];
             LabelCre2 = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + i, true)[0];
-            LabelCre.Text += Ocgrade(Number.Text);
-            TotalSum += Oc(Number.Text);
+            LabelCre.Text = Ocgrade(Number.Text);
             LabelCre2.Text = Convert.ToString(Oc(Number.Text));
-            db.OpenC();
-            MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", db.getConnection());
-            command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
-            command.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
-            command.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
-            command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = LabelGen.Text;
-            command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = Number.Text;
-            command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(Number.Text)); ;
-            command.ExecuteNonQuery();
+            TotalSum = Oc(Number.Text);
         }
-
+        private void textBoxGenerate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TotalOcGradeSum += TotalSum;
+            }
+        }
 
         private void ButtonTotal_Click_1(object sender, EventArgs e)
         {
             ButtonTotal.Visible = false;
-            y += 60;
+            y += 42;
             i += 1;
             Label LabelGen = new Label()
             {
                 Text = "ИТОГО: ",
                 Location = new Point(20, y + 5),
                 TabIndex = 10,
-                TextAlign = ContentAlignment.TopCenter,
                 Name = "Lg" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
@@ -275,19 +275,27 @@ namespace Типа_кликер__v1._0
             Controls.Add(ButtonCreate);
             ButtonCreate.Click += new EventHandler(ButtonCreate_Click);
             Label LabelCred = (System.Windows.Forms.Label)this.Controls.Find("Lctwod" + i, true)[0];
-            LabelCred.Text = Convert.ToString(TotalSum);
+            LabelCred.Text = Convert.ToString(TotalOcGradeSum);
         }
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
-            db.OpenC();
-            MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", db.getConnection());
-            command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
-            command.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
-            command.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
-            command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = "Общий итог";
-            command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = "";
-            command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(TotalSum); ;
-            command.ExecuteNonQuery();
+            for (int b = 1; b < i; b++)
+            {
+                Number = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + b, true)[0];
+                LabelGen = (System.Windows.Forms.Label)this.Controls.Find("Lg" + b, true)[0];
+                LabelCre = (System.Windows.Forms.Label)this.Controls.Find("Lc" + b, true)[0];
+                LabelCre2 = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + b, true)[0];
+                LabelCre2.Text = Convert.ToString(TotalOcGradeSum);
+                db.OpenC();
+                MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", db.getConnection());
+                command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
+                command.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
+                command.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
+                command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = LabelGen.Text;
+                command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = Number.Text;
+                command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(Number.Text)); ;
+                command.ExecuteNonQuery();
+            }
         }
 
         private void ButtonYearPlus_Click(object sender, EventArgs e)
@@ -305,7 +313,7 @@ namespace Типа_кликер__v1._0
             LabelAddSubject.Visible = true;
             TextBoxNameSubject.Visible = true;
             ButtonCreateFields.Visible = true;
-            ButtonDecor.Visible = true;
+            PanelDecor.Visible = true;
             LabelNameSubject.Visible = true;
             ButtonTotal.Visible = true;
         }
@@ -325,5 +333,21 @@ namespace Типа_кликер__v1._0
                 TextBoxQuart.Text = Convert.ToString(Convert.ToInt32(TextBoxQuart.Text) - 1);
             }
         }
+
+        private void TextBoxQuart_TextChanged(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(TextBoxQuart.Text) > 4)
+            {
+                TextBoxQuart.Text = 4.ToString();
+            }
+            else
+            {
+                if (Convert.ToInt32(TextBoxQuart.Text) < 1)
+                {
+                    TextBoxQuart.Text = 1.ToString();
+                }
+            }
+        }
+
     }
 }
