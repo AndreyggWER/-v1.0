@@ -151,7 +151,7 @@ namespace Типа_кликер__v1._0
             Label LabelCreate1 = new Label()
             {
                 Text = "",
-                Location = new Point(400, y + 8),
+                Location = new Point(300, y + 8),
                 TabIndex = 11,
                 Name = "Lc" + i,
                 Font = new Font("Microsoft Sans Serif", 8),
@@ -164,9 +164,9 @@ namespace Типа_кликер__v1._0
                 Location = new Point(1200, y + 8),
                 TabIndex = 12,
                 Name = "Lctwo" + i,
-                Font = new Font("Microsoft Sans Serif", 8),
+                Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
-                Size = new Size(60, 13),
+                Size = new Size(60, 25),
             };
             Controls.Add(LabelCreate2);
         }
@@ -201,9 +201,10 @@ namespace Типа_кликер__v1._0
                 Location = new Point(20, y + 5),
                 TabIndex = 10,
                 Name = "Lg" + i,
-                Font = new Font("Microsoft Sans Serif", 8),
+                Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
-                Size = new Size(160, 13),
+                ForeColor = Color.MediumSlateBlue,
+                Size = new Size(160, 25),
             };
             Controls.Add(LabelGen);
             if ((i - 1) % 10 == 1 && (i - 1) % 10 != 11)
@@ -214,9 +215,10 @@ namespace Типа_кликер__v1._0
                     Location = new Point(180, y + 8),
                     TabIndex = 11,
                     Name = "Lc" + i,
-                    Font = new Font("Microsoft Sans Serif", 8),
+                    Font = new Font("Microsoft Sans Serif", 18),
                     AutoSize = false,
-                    Size = new Size(160, 13),
+                    ForeColor = Color.MediumSlateBlue,
+                    Size = new Size(160, 25),
                 };
                 Controls.Add(LabelGenerate);
             }
@@ -230,9 +232,10 @@ namespace Типа_кликер__v1._0
                         Location = new Point(180, y),
                         TabIndex = 11,
                         Name = "Lc" + i,
-                        Font = new Font("Microsoft Sans Serif", 8),
+                        Font = new Font("Microsoft Sans Serif", 18),
                         AutoSize = false,
-                        Size = new Size(160, 13),
+                        ForeColor = Color.MediumSlateBlue,
+                        Size = new Size(160, 25),
                     };
                     Controls.Add(LabelGenerate);
                 }
@@ -246,9 +249,10 @@ namespace Типа_кликер__v1._0
                             Location = new Point(180, y),
                             TabIndex = 11,
                             Name = "Lc" + i,
-                            Font = new Font("Microsoft Sans Serif", 8),
+                            Font = new Font("Microsoft Sans Serif", 18),
                             AutoSize = false,
-                            Size = new Size(160, 13),
+                            ForeColor = Color.MediumSlateBlue,
+                            Size = new Size(160, 25),
                         };
                         Controls.Add(LabelGenerate);
                     }
@@ -260,19 +264,21 @@ namespace Типа_кликер__v1._0
                 Location = new Point(1200, y + 8),
                 TabIndex = 12,
                 Name = "Lctwod" + i,
-                Font = new Font("Microsoft Sans Serif", 8),
+                Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
-                Size = new Size(60, 13),
+                ForeColor = Color.MediumSlateBlue,
+                Size = new Size(60, 25),
             };
             Controls.Add(LabelCreated);
-            System.Windows.Forms.Button ButtonCreate = new System.Windows.Forms.Button()
+            RJButton ButtonCreate = new RJButton()
             {
                 Text = "Сохранить",
                 Location = new Point(20, y + 60),
                 TabIndex = 4,
                 Name = "Bcr" + i,
                 BackColor = Color.SlateBlue,
-                Size = new Size(76, 30),
+                Size = new Size(100, 30),
+                BorderRadius = 15,
                 ForeColor = Color.White
             };
             Controls.Add(ButtonCreate);
@@ -307,6 +313,8 @@ namespace Типа_кликер__v1._0
             command2.Parameters.Add("@subject", MySqlDbType.VarChar).Value = "ИТОГ";
             command2.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(TotalOcSum);
             command2.ExecuteNonQuery();
+
+            MessageBox.Show("Успешно сохранено!");
         }
 
         private void ButtonYearPlus_Click(object sender, EventArgs e)
