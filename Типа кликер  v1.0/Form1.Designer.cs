@@ -86,6 +86,7 @@
             this.TextBoxQuart.TabIndex = 86;
             this.TextBoxQuart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TextBoxQuart.TextChanged += new System.EventHandler(this.TextBoxQuart_TextChanged);
+            this.TextBoxQuart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxQuart_KeyDown);
             // 
             // LabelNameBaby
             // 

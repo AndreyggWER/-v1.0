@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Schema;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 namespace Типа_кликер__v1._0
 {
@@ -25,11 +26,12 @@ namespace Типа_кликер__v1._0
         DB db = new DB();
         int y = 178;
         int i = 0;
-        TextBox Number = new TextBox();
+        System.Windows.Forms.TextBox Number = new System.Windows.Forms.TextBox();
         Label LabelGen = new Label();
         Label LabelCre = new Label();
         Label LabelCre2 = new Label();
-        int TotalOcGradeSum = 0;
+        string TotalOcGradeSum = "";
+        int TotalOcSum = 0;
         int id = -1;
         int TotalSum = 0;
         string Name_subject = "";
@@ -183,7 +185,8 @@ namespace Типа_кликер__v1._0
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TotalOcGradeSum += TotalSum;
+                TotalOcSum += TotalSum;
+                TotalOcGradeSum += Number.Text;
             }
         }
 
@@ -262,7 +265,7 @@ namespace Типа_кликер__v1._0
                 Size = new Size(60, 13),
             };
             Controls.Add(LabelCreated);
-            Button ButtonCreate = new Button()
+            System.Windows.Forms.Button ButtonCreate = new System.Windows.Forms.Button()
             {
                 Text = "Сохранить",
                 Location = new Point(20, y + 60),
@@ -275,7 +278,7 @@ namespace Типа_кликер__v1._0
             Controls.Add(ButtonCreate);
             ButtonCreate.Click += new EventHandler(ButtonCreate_Click);
             Label LabelCred = (System.Windows.Forms.Label)this.Controls.Find("Lctwod" + i, true)[0];
-            LabelCred.Text = Convert.ToString(TotalOcGradeSum);
+            LabelCred.Text = Convert.ToString(TotalOcSum);
         }
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
@@ -293,9 +296,17 @@ namespace Типа_кликер__v1._0
                 command.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
                 command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = LabelGen.Text;
                 command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = Number.Text;
-                command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(Number.Text)); ;
+                command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(Number.Text));
                 command.ExecuteNonQuery();
             }
+            db.OpenC();
+            MySqlCommand command2 = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, '', @points)", db.getConnection());
+            command2.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
+            command2.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
+            command2.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
+            command2.Parameters.Add("@subject", MySqlDbType.VarChar).Value = "ИТОГ";
+            command2.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(TotalOcSum);
+            command2.ExecuteNonQuery();
         }
 
         private void ButtonYearPlus_Click(object sender, EventArgs e)
@@ -333,21 +344,28 @@ namespace Типа_кликер__v1._0
                 TextBoxQuart.Text = Convert.ToString(Convert.ToInt32(TextBoxQuart.Text) - 1);
             }
         }
-
         private void TextBoxQuart_TextChanged(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(TextBoxQuart.Text) > 4)
+            try
             {
-                TextBoxQuart.Text = 4.ToString();
-            }
-            else
-            {
+                Convert.ToInt32(TextBoxQuart.Text);
+                if (Convert.ToInt32(TextBoxQuart.Text) > 4)
+                {
+                    TextBoxQuart.Text = 4.ToString();
+                }
                 if (Convert.ToInt32(TextBoxQuart.Text) < 1)
                 {
                     TextBoxQuart.Text = 1.ToString();
                 }
             }
+            catch (FormatException)
+            {
+                Convert.ToString(TextBoxQuart.Text);
+            }
         }
 
+        private void TextBoxQuart_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
     }
 }
