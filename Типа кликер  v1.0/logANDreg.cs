@@ -46,7 +46,7 @@ namespace Типа_кликер__v1._0
             string Login = TextBoxUserName.Text;
             string Password = TextBoxPassword.Text;
 
-            LDB db = new LDB();
+            LDB db = new LDB(); 
 
             DataTable table = new DataTable();
 
