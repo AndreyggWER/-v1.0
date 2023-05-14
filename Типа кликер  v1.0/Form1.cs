@@ -13,6 +13,11 @@ using System.Windows.Forms;
 using System.Xml.Schema;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Drawing.Printing;
+using MySqlX.XDevAPI.Common;
+using Mysqlx.Session;
+using static Mysqlx.Datatypes.Scalar.Types;
+
 namespace Типа_кликер__v1._0
 {
     public partial class Grades_Scoring : Form
@@ -32,11 +37,12 @@ namespace Типа_кликер__v1._0
         Label LabelCre2 = new Label();
         string TotalOcGradeSum = "";
         int TotalOcSum = 0;
-        int id = -1;
+        private string result = "";
         int TotalSum = 0;
         string Name_subject = "";
         int Oc(string s)
-        {            int Sum = 0;
+        {
+            int Sum = 0;
             string[] subs = s.Split(' ');
             foreach (var sub in subs)
             {
@@ -92,7 +98,7 @@ namespace Типа_кликер__v1._0
                     {
                         Koef = Convert.ToInt32(number1[1]);
                     }
-                    catch (Exception )
+                    catch (Exception)
                     {
                         // recover from exception
                         Koef = 1;
@@ -136,7 +142,7 @@ namespace Типа_кликер__v1._0
                 Size = new Size(160, 13),
             };
             Controls.Add(LabelGenerate);
-            System.Windows.Forms.TextBox textBoxGenerate = new System.Windows.Forms.TextBox()
+            System.Windows.Forms.TextBox TextBoxGenerate = new System.Windows.Forms.TextBox()
             {
 
                 Location = new Point(180, y),
@@ -144,10 +150,10 @@ namespace Типа_кликер__v1._0
                 Font = new Font("Microsoft Sans Serif", 12),
                 Name = "Tg" + i,
             };
-            textBoxGenerate.TextChanged += new EventHandler(textBoxGenerate_TextChanged);
-            textBoxGenerate.KeyDown += new KeyEventHandler(textBoxGenerate_KeyDown);
+            TextBoxGenerate.TextChanged += new EventHandler(TextBoxGenerate_TextChanged);
+            TextBoxGenerate.KeyDown += new KeyEventHandler(TextBoxGenerate_KeyDown);
 
-            Controls.Add(textBoxGenerate);
+            Controls.Add(TextBoxGenerate);
             Label LabelCreate1 = new Label()
             {
                 Text = "",
@@ -170,9 +176,8 @@ namespace Типа_кликер__v1._0
             };
             Controls.Add(LabelCreate2);
         }
-        private void textBoxGenerate_TextChanged(object sender, EventArgs e)
+        private void TextBoxGenerate_TextChanged(object sender, EventArgs e)
         {
-            id += 1;
             Number = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + i, true)[0];
             LabelGen = (System.Windows.Forms.Label)this.Controls.Find("Lg" + i, true)[0];
             LabelCre = (System.Windows.Forms.Label)this.Controls.Find("Lc" + i, true)[0];
@@ -181,20 +186,29 @@ namespace Типа_кликер__v1._0
             LabelCre2.Text = Convert.ToString(Oc(Number.Text));
             TotalSum = Oc(Number.Text);
         }
-        private void textBoxGenerate_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxGenerate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 TotalOcSum += TotalSum;
                 TotalOcGradeSum += Number.Text;
+                int strLen = Name_subject.Length;
+                result += "          " + Name_subject + Convert.ToString(TotalSum).PadLeft(48 - strLen, ' ') + "\n";
+                result += "          " + Number.Text + "\n\n";
+
             }
         }
 
         private void ButtonTotal_Click_1(object sender, EventArgs e)
         {
+            result += "          ------------------------------------------------\n\n";
             ButtonTotal.Visible = false;
             y += 42;
             i += 1;
+            ButtonPrint.Size = new Size(100, 30);
+            ButtonPrint.BorderRadius = 15;
+            ButtonPrint.Location = new Point(140, y + 60);
+            ButtonPrint.Visible = true;
             Label LabelGen = new Label()
             {
                 Text = "ИТОГО: ",
@@ -276,7 +290,7 @@ namespace Типа_кликер__v1._0
                 Location = new Point(20, y + 60),
                 TabIndex = 4,
                 Name = "Bcr" + i,
-                BackColor = Color.SlateBlue,
+                BackColor = Color.MediumSlateBlue,
                 Size = new Size(100, 30),
                 BorderRadius = 15,
                 ForeColor = Color.White
@@ -335,6 +349,11 @@ namespace Типа_кликер__v1._0
             PanelDecor.Visible = true;
             LabelNameSubject.Visible = true;
             ButtonTotal.Visible = true;
+            result += "\n\n\n\n";
+            result += "          " + TextBoxNameBaby.Text + "\n";
+            result += "          " + TextBoxYear.Text + "/" + TextBoxQuart.Text + "четверть" + "\n\n";
+            result += "          ------------------------------------------------\n\n";
+
         }
 
         private void ButtonQuartMinus_Click(object sender, EventArgs e)
@@ -374,6 +393,45 @@ namespace Типа_кликер__v1._0
 
         private void TextBoxQuart_KeyDown(object sender, KeyEventArgs e)
         {
+        }
+
+        private void ButtonPrint_Click(object sender, EventArgs e)
+        {
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += PrintPageHandler;
+            PrintDialog printDialog = new PrintDialog();
+
+            printDialog.Document = printDocument;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+                printDialog.Document.Print();
+        }
+
+        void PrintPageHandler(object sender, PrintPageEventArgs e)
+        {
+            string Str = "Итог: ";
+            int strLen = Str.Length;
+            result += "          Итог: " + Convert.ToString(TotalOcSum).PadLeft(48 - strLen, ' ');
+            e.Graphics.DrawString(result, new Font("Courier New", 14), Brushes.Black, 0, 0);
+        }
+
+        private void ButtonRegOrLog_Click(object sender, EventArgs e)
+        {
+            if (DataInProgramm.UserLogin == "")
+            {
+                Login LogREG = new Login();
+                LogREG.ShowDialog();
+            }
+            else
+            {
+                ButtonRegOrLog.Text = DataInProgramm.UserLogin;
+                DialogResult result = MessageBox.Show("Вы уже вошли, всё равно перейти в окно авторизации?", "", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Login LogREG = new Login();
+                    LogREG.ShowDialog();
+                }
+            }
         }
     }
 }

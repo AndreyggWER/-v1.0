@@ -46,6 +46,9 @@
             this.PanelDecor = new System.Windows.Forms.Panel();
             this.ButtonCreateFields = new Типа_кликер__v1._0.RJButton();
             this.ButtonTotal = new Типа_кликер__v1._0.RJButton();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.ButtonRegOrLog = new Типа_кликер__v1._0.RJButton();
+            this.ButtonPrint = new Типа_кликер__v1._0.RJButton();
             this.ButtonGO = new Типа_кликер__v1._0.RJButton();
             this.PanelDecor.SuspendLayout();
             this.SuspendLayout();
@@ -286,6 +289,46 @@
             this.ButtonTotal.Visible = false;
             this.ButtonTotal.Click += new System.EventHandler(this.ButtonTotal_Click_1);
             // 
+            // ButtonRegOrLog
+            // 
+            this.ButtonRegOrLog.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonRegOrLog.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonRegOrLog.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonRegOrLog.BorderRadius = 15;
+            this.ButtonRegOrLog.BorderSize = 0;
+            this.ButtonRegOrLog.FlatAppearance.BorderSize = 0;
+            this.ButtonRegOrLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonRegOrLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonRegOrLog.ForeColor = System.Drawing.Color.White;
+            this.ButtonRegOrLog.Location = new System.Drawing.Point(540, 22);
+            this.ButtonRegOrLog.Name = "ButtonRegOrLog";
+            this.ButtonRegOrLog.Size = new System.Drawing.Size(145, 29);
+            this.ButtonRegOrLog.TabIndex = 172;
+            this.ButtonRegOrLog.Text = "Авторизация";
+            this.ButtonRegOrLog.TextColor = System.Drawing.Color.White;
+            this.ButtonRegOrLog.UseVisualStyleBackColor = false;
+            this.ButtonRegOrLog.Click += new System.EventHandler(this.ButtonRegOrLog_Click);
+            // 
+            // ButtonPrint
+            // 
+            this.ButtonPrint.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonPrint.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonPrint.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ButtonPrint.BorderRadius = 15;
+            this.ButtonPrint.BorderSize = 0;
+            this.ButtonPrint.FlatAppearance.BorderSize = 0;
+            this.ButtonPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonPrint.ForeColor = System.Drawing.Color.White;
+            this.ButtonPrint.Location = new System.Drawing.Point(248, 489);
+            this.ButtonPrint.Name = "ButtonPrint";
+            this.ButtonPrint.Size = new System.Drawing.Size(100, 30);
+            this.ButtonPrint.TabIndex = 171;
+            this.ButtonPrint.Text = "Печать";
+            this.ButtonPrint.TextColor = System.Drawing.Color.White;
+            this.ButtonPrint.UseVisualStyleBackColor = false;
+            this.ButtonPrint.Visible = false;
+            this.ButtonPrint.Click += new System.EventHandler(this.ButtonPrint_Click);
+            // 
             // ButtonGO
             // 
             this.ButtonGO.BackColor = System.Drawing.Color.MediumSlateBlue;
@@ -312,6 +355,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1911, 1061);
+            this.Controls.Add(this.ButtonRegOrLog);
+            this.Controls.Add(this.ButtonPrint);
             this.Controls.Add(this.PanelDecor);
             this.Controls.Add(this.ButtonQuartMinus);
             this.Controls.Add(this.ButtonQuartPlus);
@@ -352,6 +397,9 @@
         private System.Windows.Forms.Button ButtonQuartPlus;
         private System.Windows.Forms.Button ButtonQuartMinus;
         private System.Windows.Forms.Panel PanelDecor;
+        private RJButton ButtonPrint;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private RJButton ButtonRegOrLog;
     }
 }
 
