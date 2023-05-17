@@ -1,12 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Типа_кликер__v1._0
@@ -17,15 +11,35 @@ namespace Типа_кликер__v1._0
         {
             InitializeComponent();
         }
+
+        readonly MySqlConnection Lconnection = new MySqlConnection("server=localhost;port=3306;username=root;password=root;database=loginandreg");
+
+        public void LOpenC()
+        {
+            if (Lconnection.State == System.Data.ConnectionState.Closed)
+            {
+                Lconnection.Open();
+            }
+        }
+        public void LCloseC()
+        {
+            if (Lconnection.State == System.Data.ConnectionState.Open)
+            {
+                Lconnection.Close();
+            }
+        }
+        public MySqlConnection GetLconnection()
+        {
+            return Lconnection;
+        }
         public Boolean CheckUser()
         {
-            LDB db = new LDB();
 
             DataTable table = new DataTable();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SElECT * FROM `users` WHERE `login` = @Login", db.getLconnection());
+            MySqlCommand command = new MySqlCommand("SElECT * FROM `users` WHERE `login` = @Login", GetLconnection());
             command.Parameters.Add("@Login", MySqlDbType.VarChar).Value = TextBoxUserName.Text;
             adapter.SelectCommand = command;
             adapter.Fill(table);
@@ -44,15 +58,13 @@ namespace Типа_кликер__v1._0
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             string Login = TextBoxUserName.Text;
-            string Password = TextBoxPassword.Text;
 
-            LDB db = new LDB(); 
 
             DataTable table = new DataTable();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SElECT * FROM `users` WHERE `login` = Login AND `password` = Password", db.getLconnection());
+            MySqlCommand command = new MySqlCommand("SElECT * FROM `users` WHERE `login` = Login AND `password` = Password", GetLconnection());
 
             adapter.SelectCommand = command;
             adapter.Fill(table);
@@ -79,19 +91,18 @@ namespace Типа_кликер__v1._0
             {
                 return;
             }
-            LDB db = new LDB();
-            MySqlCommand command = new MySqlCommand("INSERT INTO `users` (`login`, `password`) VALUES (@Login, @Password)", db.getLconnection());
+            MySqlCommand command = new MySqlCommand("INSERT INTO `users` (`login`, `password`) VALUES (@Login, @Password)", GetLconnection());
             command.Parameters.Add("@Login", MySqlDbType.VarChar).Value = Login;
             command.Parameters.Add("@Password", MySqlDbType.VarChar).Value = Password;
 
-            db.LOpenC();
+            LOpenC();
 
             if (command.ExecuteNonQuery() == 1)
             {
                 MessageBox.Show("Успешная регистрация");
             }
 
-            db.LCloseC();
+            LCloseC();
         }
     }
 }

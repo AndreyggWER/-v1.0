@@ -50,7 +50,9 @@
             this.ButtonRegOrLog = new Типа_кликер__v1._0.RJButton();
             this.ButtonPrint = new Типа_кликер__v1._0.RJButton();
             this.ButtonGO = new Типа_кликер__v1._0.RJButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PanelDecor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TextBoxYear
@@ -235,6 +237,8 @@
             // 
             // PanelDecor
             // 
+            this.PanelDecor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelDecor.BackColor = System.Drawing.Color.SlateBlue;
             this.PanelDecor.Controls.Add(this.LabelAddSubject);
             this.PanelDecor.Controls.Add(this.LabelNameSubject);
@@ -243,7 +247,7 @@
             this.PanelDecor.Controls.Add(this.ButtonTotal);
             this.PanelDecor.Location = new System.Drawing.Point(-2, 70);
             this.PanelDecor.Name = "PanelDecor";
-            this.PanelDecor.Size = new System.Drawing.Size(1847, 128);
+            this.PanelDecor.Size = new System.Drawing.Size(1040, 128);
             this.PanelDecor.TabIndex = 170;
             this.PanelDecor.Visible = false;
             // 
@@ -258,7 +262,7 @@
             this.ButtonCreateFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonCreateFields.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ButtonCreateFields.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonCreateFields.Location = new System.Drawing.Point(199, 75);
+            this.ButtonCreateFields.Location = new System.Drawing.Point(199, 76);
             this.ButtonCreateFields.Name = "ButtonCreateFields";
             this.ButtonCreateFields.Size = new System.Drawing.Size(125, 30);
             this.ButtonCreateFields.TabIndex = 167;
@@ -349,12 +353,26 @@
             this.ButtonGO.UseVisualStyleBackColor = false;
             this.ButtonGO.Click += new System.EventHandler(this.ButtonGO_Click_1);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Image = global::Типа_кликер__v1._0.Properties.Resources.Шестеренка__1_;
+            this.pictureBox1.Location = new System.Drawing.Point(982, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 174;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1911, 1061);
+            this.ClientSize = new System.Drawing.Size(1038, 686);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ButtonRegOrLog);
             this.Controls.Add(this.ButtonPrint);
             this.Controls.Add(this.PanelDecor);
@@ -370,8 +388,9 @@
             this.Controls.Add(this.LabelYear);
             this.Controls.Add(this.TextBoxYear);
             this.Name = "Grades_Scoring";
-            this.Text = "Form1";
+            this.Text = "Grades_Scoring";
             this.PanelDecor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,6 +419,7 @@
         private RJButton ButtonPrint;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private RJButton ButtonRegOrLog;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
