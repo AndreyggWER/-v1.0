@@ -57,6 +57,12 @@
       <DependentUpon>DataBaseAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="DataInProgramm.cs" />
+    <Compile Include="DataTableView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataTableView.Designer.cs">
+      <DependentUpon>DataTableView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     <Compile Include="RoundButton.cs" />
     <EmbeddedResource Include="DataBaseAccess.resx">
       <DependentUpon>DataBaseAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataTableView.resx">
+      <DependentUpon>DataTableView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

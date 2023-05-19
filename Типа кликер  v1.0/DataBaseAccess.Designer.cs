@@ -46,7 +46,7 @@
             this.TextBoxServer.Name = "TextBoxServer";
             this.TextBoxServer.Size = new System.Drawing.Size(100, 20);
             this.TextBoxServer.TabIndex = 0;
-            this.TextBoxServer.Text = "localhost";
+            this.TextBoxServer.Text = "db4free.net";
             this.TextBoxServer.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // label1
@@ -91,7 +91,7 @@
             this.TextBoxUserName.Name = "TextBoxUserName";
             this.TextBoxUserName.Size = new System.Drawing.Size(100, 20);
             this.TextBoxUserName.TabIndex = 4;
-            this.TextBoxUserName.Text = "root";
+            this.TextBoxUserName.Text = "andrei123";
             this.TextBoxUserName.TextChanged += new System.EventHandler(this.TextBox3_TextChanged);
             // 
             // label4
@@ -109,7 +109,7 @@
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.Size = new System.Drawing.Size(100, 20);
             this.TextBoxPassword.TabIndex = 6;
-            this.TextBoxPassword.Text = "root";
+            this.TextBoxPassword.Text = "YaBanan123";
             this.TextBoxPassword.TextChanged += new System.EventHandler(this.TextBox4_TextChanged);
             // 
             // label5
@@ -127,7 +127,7 @@
             this.TextBoxDataBase.Name = "TextBoxDataBase";
             this.TextBoxDataBase.Size = new System.Drawing.Size(100, 20);
             this.TextBoxDataBase.TabIndex = 8;
-            this.TextBoxDataBase.Text = "ocenki";
+            this.TextBoxDataBase.Text = "grades12345";
             this.TextBoxDataBase.TextChanged += new System.EventHandler(this.TextBox5_TextChanged);
             // 
             // DataBaseAccess

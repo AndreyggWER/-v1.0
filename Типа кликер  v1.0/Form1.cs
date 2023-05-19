@@ -16,7 +16,7 @@ namespace Типа_кликер__v1._0
             TextBoxYear.Text = DateTime.Now.Year.ToString();
             TextBoxQuart.Text = "1";
         }
-        MySqlConnection connection = new MySqlConnection();
+        MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root;database=ocenki");
         public void OpenC()
         {
             if (connection.State == System.Data.ConnectionState.Closed)
@@ -227,7 +227,7 @@ namespace Типа_кликер__v1._0
                 Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
                 ForeColor = Color.MediumSlateBlue,
-                Size = new Size(160, 25),
+                Size = new Size(110, 25),
             };
             Controls.Add(LabelGen);
             if ((i - 1) % 10 == 1 && (i - 1) % 10 != 11)
@@ -235,13 +235,12 @@ namespace Типа_кликер__v1._0
                 Label LabelGenerate = new Label()
                 {
                     Text = Convert.ToInt32(i - 1) + "  предмет",
-                    Location = new Point(180, y + 8),
+                    Location = new Point(130, y + 4),
                     TabIndex = 11,
                     Name = "Lc" + i,
                     Font = new Font("Microsoft Sans Serif", 18),
-                    AutoSize = false,
-                    ForeColor = Color.MediumSlateBlue,
-                    Size = new Size(160, 25),
+                    AutoSize = true,
+                    ForeColor = Color.MediumSlateBlue
                 };
                 Controls.Add(LabelGenerate);
             }
@@ -252,13 +251,12 @@ namespace Типа_кликер__v1._0
                     Label LabelGenerate = new Label()
                     {
                         Text = Convert.ToInt32(i - 1) + "  предметов",
-                        Location = new Point(180, y),
+                        Location = new Point(130, y + 4),
                         TabIndex = 11,
                         Name = "Lc" + i,
                         Font = new Font("Microsoft Sans Serif", 18),
-                        AutoSize = false,
-                        ForeColor = Color.MediumSlateBlue,
-                        Size = new Size(160, 25),
+                        AutoSize = true,
+                        ForeColor = Color.MediumSlateBlue
                     };
                     Controls.Add(LabelGenerate);
                 }
@@ -269,13 +267,12 @@ namespace Типа_кликер__v1._0
                         Label LabelGenerate = new Label()
                         {
                             Text = Convert.ToInt32(i - 1) + "  предмета",
-                            Location = new Point(180, y),
+                            Location = new Point(130, y + 4),
                             TabIndex = 11,
                             Name = "Lc" + i,
                             Font = new Font("Microsoft Sans Serif", 18),
-                            AutoSize = false,
-                            ForeColor = Color.MediumSlateBlue,
-                            Size = new Size(160, 25),
+                            AutoSize = true,
+                            ForeColor = Color.MediumSlateBlue
                         };
                         Controls.Add(LabelGenerate);
                     }
@@ -284,7 +281,7 @@ namespace Типа_кликер__v1._0
             Label LabelCreated = new Label()
             {
                 Text = "",
-                Location = new Point(100, y + 8),
+                Location = new Point(900, y + 8),
                 TabIndex = 12,
                 Name = "Lctwod" + i,
                 Font = new Font("Microsoft Sans Serif", 18),
@@ -329,6 +326,12 @@ namespace Типа_кликер__v1._0
                 command.ExecuteNonQuery();
             }
             OpenC();
+
+            //MySqlConnection connection = GetConnection();
+
+            //MySqlCommand command1 = new MySqlCommand("SET NAMES utf8", GetConnection());
+            //command1.ExecuteNonQuery();
+
             MySqlCommand command2 = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, '', @points)", GetConnection());
             command2.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
             command2.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
@@ -336,7 +339,6 @@ namespace Типа_кликер__v1._0
             command2.Parameters.Add("@subject", MySqlDbType.VarChar).Value = "ИТОГ";
             command2.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(TotalOcSum);
             command2.ExecuteNonQuery();
-
             MessageBox.Show("Успешно сохранено!");
         }
 
@@ -352,6 +354,7 @@ namespace Типа_кликер__v1._0
 
         private void ButtonGO_Click_1(object sender, EventArgs e)
         {
+            ButtonTable.Visible = true;
             LabelAddSubject.Visible = true;
             TextBoxNameSubject.Visible = true;
             ButtonCreateFields.Visible = true;
@@ -452,6 +455,13 @@ namespace Типа_кликер__v1._0
                 DataInProgramm.DBA = DataInProgramm.DBServer + DataInProgramm.DBPort + DataInProgramm.DBUserName + DataInProgramm.DBPassword + DataInProgramm.DataBase;
                 File.WriteAllText("DB.txt", DataInProgramm.DBA);
                 connection = new MySqlConnection(File.ReadAllText("DB.txt"));
-            }
+
+        }
+
+        private void ButtonTable_Click(object sender, EventArgs e)
+        {
+            DataTableView DataViewTable = new DataTableView();
+            DataViewTable.ShowDialog();
+        }
     }
 }

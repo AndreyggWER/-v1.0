@@ -51,6 +51,7 @@
             this.ButtonPrint = new Типа_кликер__v1._0.RJButton();
             this.ButtonGO = new Типа_кликер__v1._0.RJButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ButtonTable = new Типа_кликер__v1._0.RJButton();
             this.PanelDecor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -240,6 +241,7 @@
             this.PanelDecor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelDecor.BackColor = System.Drawing.Color.SlateBlue;
+            this.PanelDecor.Controls.Add(this.ButtonTable);
             this.PanelDecor.Controls.Add(this.LabelAddSubject);
             this.PanelDecor.Controls.Add(this.LabelNameSubject);
             this.PanelDecor.Controls.Add(this.TextBoxNameSubject);
@@ -366,6 +368,27 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
+            // ButtonTable
+            // 
+            this.ButtonTable.BackColor = System.Drawing.Color.White;
+            this.ButtonTable.BackgroundColor = System.Drawing.Color.White;
+            this.ButtonTable.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonTable.BorderRadius = 15;
+            this.ButtonTable.BorderSize = 0;
+            this.ButtonTable.FlatAppearance.BorderSize = 0;
+            this.ButtonTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonTable.ForeColor = System.Drawing.Color.SlateBlue;
+            this.ButtonTable.Location = new System.Drawing.Point(899, 76);
+            this.ButtonTable.Name = "ButtonTable";
+            this.ButtonTable.Size = new System.Drawing.Size(125, 30);
+            this.ButtonTable.TabIndex = 168;
+            this.ButtonTable.Text = "Таблица";
+            this.ButtonTable.TextColor = System.Drawing.Color.SlateBlue;
+            this.ButtonTable.UseVisualStyleBackColor = false;
+            this.ButtonTable.Visible = false;
+            this.ButtonTable.Click += new System.EventHandler(this.ButtonTable_Click);
+            // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,6 +443,7 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private RJButton ButtonRegOrLog;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private RJButton ButtonTable;
     }
 }
 
