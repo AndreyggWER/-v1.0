@@ -224,13 +224,10 @@ namespace Типа_кликер__v1._0
             int senderTag = Int32.Parse(tt);
             textboxRates = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + senderTag, true)[0];
             
-            //labelCaption = (System.Windows.Forms.Label)this.Controls.Find("Lg" + senderTag, true)[0];
             labelFormula = (System.Windows.Forms.Label)this.Controls.Find("Lc" + senderTag, true)[0];
             labelFormula.Text = Ocgrade(textboxRates.Text);
             labelReward = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + senderTag, true)[0];
-            labelReward.Text = Convert.ToString(Oc(textboxRates.Text));
-            //TotalSum = Oc(textboxRates.Text);
-        }
+            labelReward.Text = Convert.ToString(Oc(textboxRates.Text));        }
 
         private void ButtonTotal_Click_1(object sender, EventArgs e)
         {
@@ -254,7 +251,7 @@ namespace Типа_кликер__v1._0
             ButtonPrint.BorderRadius = 15;
             ButtonPrint.Location = new Point(140, currentTop + 60);
             ButtonPrint.Visible = true;
-            Label labelCaption = new Label()
+            Label labelCaption1 = new Label()
             {
                 Text = "ИТОГО: ",
                 Location = new Point(20, currentTop + 5),
@@ -265,21 +262,21 @@ namespace Типа_кликер__v1._0
                 ForeColor = Color.MediumSlateBlue,
                 Size = new Size(110, 25),
             };
-            Controls.Add(labelCaption);
+            Controls.Add(labelCaption1);
 
-            string postfix = "предмета";
+            string postfix1 = "предмета";
             if ((currentIndex) % 10 == 1 && (currentIndex) % 10 != 11)
             {
-                postfix = "предмет";
+                postfix1 = "предмет";
             }
             else if (((currentIndex - 1) % 10 >= 5 && (currentIndex - 1) % 10 <= 20) || (currentIndex - 1) % 10 == 0)
             {
-                postfix = "предметов";
+                postfix1 = "предметов";
             }
 
             Label labelFormula = new Label()
             {
-                Text = Convert.ToInt32(currentIndex) + " " + postfix,
+                Text = Convert.ToInt32(currentIndex) + " " + postfix1,
                 Location = new Point(130, currentTop + 4),
                 TabIndex = 11,
                 Name = "LcItogo",
@@ -324,8 +321,6 @@ namespace Типа_кликер__v1._0
             };
             Controls.Add(ButtonCreate);
             ButtonCreate.Click += new EventHandler(ButtonCreate_Click);
-            //Label LabelCred = (System.Windows.Forms.Label)this.Controls.Find("Lctwod" + currentIndex, true)[0];
-
         }
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
@@ -342,7 +337,6 @@ namespace Типа_кликер__v1._0
                 labelCaption = (System.Windows.Forms.Label)this.Controls.Find("Lg" + b, true)[0];
                 labelFormula = (System.Windows.Forms.Label)this.Controls.Find("Lc" + b, true)[0];
                 labelReward = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + b, true)[0];
-                labelReward.Text = Convert.ToString(TotalOcGradeSum);
                 OpenC();
                 MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", GetConnection());
                 command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
