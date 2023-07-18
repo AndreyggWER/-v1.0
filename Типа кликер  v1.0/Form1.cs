@@ -441,7 +441,7 @@ namespace Типа_кликер__v1._0
                 {
                     TextBoxQuart.Text = 4.ToString();
                 }
-                if (Convert.ToInt32(TextBoxQuart.Text) < 1)
+                if (Convert.ToInt32(TextBoxQuart.Text) < 1) 
                 {
                     TextBoxQuart.Text = 1.ToString();
                 }
