@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Типа_кликер__v1._0
@@ -11,8 +12,7 @@ namespace Типа_кликер__v1._0
         {
             InitializeComponent();
         }
-
-        readonly MySqlConnection Lconnection = new MySqlConnection("server=localhost;port=3306;username=root;password=root;database=loginandreg");
+        readonly MySqlConnection Lconnection = new MySqlConnection(File.ReadAllText("DB.txt"));
 
         public void LOpenC()
         {
@@ -57,22 +57,22 @@ namespace Типа_кликер__v1._0
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            string Login = TextBoxUserName.Text;
 
 
             DataTable table = new DataTable();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SElECT * FROM `users` WHERE `login` = Login AND `password` = Password", GetLconnection());
-
+            MySqlCommand command = new MySqlCommand("SElECT * FROM `users` WHERE `login` = @Login AND `password` = @Pass", GetLconnection());
+            command.Parameters.Add("@Login", MySqlDbType.VarChar).Value = TextBoxUserName.Text;
+            command.Parameters.Add("@Pass", MySqlDbType.VarChar).Value = TextBoxPassword.Text; ;
             adapter.SelectCommand = command;
             adapter.Fill(table);
 
             if (table.Rows.Count > 0)
             {
                 MessageBox.Show("Вы вошли");
-                DataInProgramm.UserLogin = Login;
+                DataInProgramm.UserLogin = TextBoxUserName.Text;
                 this.Close();
             }
             else

@@ -4,6 +4,11 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Printing;
+using System.Data;
+using SD = System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Diagnostics;
+using Mysqlx.Crud;
 
 namespace Типа_кликер__v1._0
 {
@@ -15,8 +20,10 @@ namespace Типа_кликер__v1._0
             InitializeComponent();
             TextBoxYear.Text = DateTime.Now.Year.ToString();
             TextBoxQuart.Text = "1";
+
         }
-        MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root;database=ocenki");
+        MySqlConnection connection = new MySqlConnection(File.ReadAllText("DB.txt"));
+
         public void OpenC()
         {
             if (connection.State == System.Data.ConnectionState.Closed)
@@ -24,6 +31,8 @@ namespace Типа_кликер__v1._0
                 connection.Open();
             }
         }
+        public SD.DataSet ds;
+
         public void CloseC()
         {
             if (connection.State == System.Data.ConnectionState.Open)
@@ -35,13 +44,13 @@ namespace Типа_кликер__v1._0
         {
             return connection;
         }
-        int y = 178;
-        int i = 0;
+        int currentTop = 178;
+        int currentIndex = 0;
         int a = -1;
-        System.Windows.Forms.TextBox Number = new System.Windows.Forms.TextBox();
-        Label LabelGen = new Label();
-        Label LabelCre = new Label();
-        Label LabelCre2 = new Label();
+        System.Windows.Forms.TextBox textboxRates = new System.Windows.Forms.TextBox();
+        Label labelCaption = new Label();
+        Label labelFormula = new Label();
+        Label labelReward = new Label();
         string TotalOcGradeSum = "";
         int TotalOcSum = 0;
         private string result = "";
@@ -132,8 +141,14 @@ namespace Типа_кликер__v1._0
             }
             return MainSum;
         }
-        private void ButtonCreateFields_Click_1(object sender, EventArgs e)
+
+        private void CreateRow(string caption, string rates, string formula, string reward)
         {
+            currentTop += 42;
+            currentIndex += 1;
+            Debug.WriteLine(currentIndex);
+
+            /*
             a += 1;
             if (a > 0)
             {
@@ -143,159 +158,165 @@ namespace Типа_кликер__v1._0
                 result += "          " + Name_subject + Convert.ToString(TotalSum).PadLeft(48 - strLen, ' ') + "\n";
                 result += "          " + Number.Text + "\n\n";
             }
-            Name_subject = Convert.ToString(TextBoxNameSubject.Text);
-            TextBoxNameSubject.Text = "";
-            y += 42;
-            i += 1;
-            Label LabelGenerate = new Label()
+            */
+
+            Label labelCaption = new Label()
             {
-                Text = "" + Name_subject,
-                Location = new Point(20, y + 5),
+                Text = caption,
+                Location = new Point(20, currentTop + 5),
                 TabIndex = 10,
-                Name = "Lg" + i,
+                Name = "Lg" + currentIndex,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = false,
                 Size = new Size(120, 13),
             };
-            Controls.Add(LabelGenerate);
-            System.Windows.Forms.TextBox TextBoxGenerate = new System.Windows.Forms.TextBox()
-            {
+            Controls.Add(labelCaption);
 
-                Location = new Point(150, y),
+            System.Windows.Forms.TextBox textboxRates = new System.Windows.Forms.TextBox()
+            {
+                Text = rates,
+                Location = new Point(150, currentTop),
                 TabIndex = 10,
                 Font = new Font("Microsoft Sans Serif", 12),
-                Name = "Tg" + i,
+                Name = "Tg" + currentIndex,
             };
-            TextBoxGenerate.TextChanged += new EventHandler(TextBoxGenerate_TextChanged);
+            textboxRates.TextChanged += new EventHandler(TextBoxGenerate_TextChanged);
+            Controls.Add(textboxRates);
 
-            Controls.Add(TextBoxGenerate);
-            Label LabelCreate1 = new Label()
+            Label labelFormula = new Label()
             {
-                Text = "",
-                Location = new Point(260, y + 8),
+                Text = formula,
+                Location = new Point(260, currentTop + 8),
                 TabIndex = 11,
-                Name = "Lc" + i,
+                Name = "Lc" + currentIndex,
                 Font = new Font("Microsoft Sans Serif", 8),
                 AutoSize = true
             };
-            Controls.Add(LabelCreate1);
-            Label LabelCreate2 = new Label()
+            Controls.Add(labelFormula);
+
+            Label labelReward = new Label()
             {
-                Text = "",
-                Location = new Point(900, y + 6),
+                Text = reward,
+                Location = new Point(900, currentTop + 6),
                 Anchor = AnchorStyles.Right | AnchorStyles.Top,
                 TabIndex = 12,
-                Name = "Lctwo" + i,
+                Name = "Lctwo" + currentIndex,
                 Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
                 Size = new Size(80, 30),
             };
-            Controls.Add(LabelCreate2);
+            Controls.Add(labelReward);
+        }
+
+        private void ButtonCreateFields_Click_1(object sender, EventArgs e)
+        {
+            
+            Name_subject = Convert.ToString(TextBoxNameSubject.Text);
+            TextBoxNameSubject.Text = "";
+            
+            
+            CreateRow(Name_subject, "", "", "");
         }
         private void TextBoxGenerate_TextChanged(object sender, EventArgs e)
         {
-            Number = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + i, true)[0];
-            LabelGen = (System.Windows.Forms.Label)this.Controls.Find("Lg" + i, true)[0];
-            LabelCre = (System.Windows.Forms.Label)this.Controls.Find("Lc" + i, true)[0];
-            LabelCre2 = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + i, true)[0];
-            LabelCre.Text = Ocgrade(Number.Text);
-            LabelCre2.Text = Convert.ToString(Oc(Number.Text));
-            TotalSum = Oc(Number.Text);
+            System.Windows.Forms.TextBox tb = (sender as System.Windows.Forms.TextBox);
+            string tt = tb.Name.Replace("Tg", "");
+            int senderTag = Int32.Parse(tt);
+            textboxRates = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + senderTag, true)[0];
+            
+            //labelCaption = (System.Windows.Forms.Label)this.Controls.Find("Lg" + senderTag, true)[0];
+            labelFormula = (System.Windows.Forms.Label)this.Controls.Find("Lc" + senderTag, true)[0];
+            labelFormula.Text = Ocgrade(textboxRates.Text);
+            labelReward = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + senderTag, true)[0];
+            labelReward.Text = Convert.ToString(Oc(textboxRates.Text));
+            //TotalSum = Oc(textboxRates.Text);
         }
 
         private void ButtonTotal_Click_1(object sender, EventArgs e)
         {
+            connection = new MySqlConnection(File.ReadAllText("DB.txt"));
+            OpenC();
+            MySqlDataAdapter DataAdapter = new MySqlDataAdapter("DELETE FROM `grades`", GetConnection());
+            SD.DataTable Table = new SD.DataTable();
+            DataAdapter.Fill(Table);
+            DataGridViewOcenki.DataSource = Table;
+            CloseC();
             TotalOcSum += TotalSum;
-            TotalOcGradeSum += Number.Text;
+            TotalOcGradeSum += textboxRates.Text;
             int strLen = Name_subject.Length;
             result += "          " + Name_subject + Convert.ToString(TotalSum).PadLeft(48 - strLen, ' ') + "\n";
-            result += "          " + Number.Text + "\n\n";
+            result += "          " + textboxRates.Text + "\n\n";
             result += "          ------------------------------------------------\n\n";
             ButtonTotal.Visible = false;
-            y += 42;
-            i += 1;
+            currentTop += 42;
+            //currentIndex += 1;
             ButtonPrint.Size = new Size(100, 30);
             ButtonPrint.BorderRadius = 15;
-            ButtonPrint.Location = new Point(140, y + 60);
+            ButtonPrint.Location = new Point(140, currentTop + 60);
             ButtonPrint.Visible = true;
-            Label LabelGen = new Label()
+            Label labelCaption = new Label()
             {
                 Text = "ИТОГО: ",
-                Location = new Point(20, y + 5),
+                Location = new Point(20, currentTop + 5),
                 TabIndex = 10,
-                Name = "Lg" + i,
+                Name = "LgItogo",
                 Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
                 ForeColor = Color.MediumSlateBlue,
                 Size = new Size(110, 25),
             };
-            Controls.Add(LabelGen);
-            if ((i - 1) % 10 == 1 && (i - 1) % 10 != 11)
+            Controls.Add(labelCaption);
+
+            string postfix = "предмета";
+            if ((currentIndex) % 10 == 1 && (currentIndex) % 10 != 11)
             {
-                Label LabelGenerate = new Label()
-                {
-                    Text = Convert.ToInt32(i - 1) + "  предмет",
-                    Location = new Point(130, y + 4),
-                    TabIndex = 11,
-                    Name = "Lc" + i,
-                    Font = new Font("Microsoft Sans Serif", 18),
-                    AutoSize = true,
-                    ForeColor = Color.MediumSlateBlue
-                };
-                Controls.Add(LabelGenerate);
+                postfix = "предмет";
             }
-            else
+            else if (((currentIndex - 1) % 10 >= 5 && (currentIndex - 1) % 10 <= 20) || (currentIndex - 1) % 10 == 0)
             {
-                if (((i - 1) % 10 >= 5 && (i - 1) % 10 <= 20) || (i - 1) % 10 == 0)
-                {
-                    Label LabelGenerate = new Label()
-                    {
-                        Text = Convert.ToInt32(i - 1) + "  предметов",
-                        Location = new Point(130, y + 4),
-                        TabIndex = 11,
-                        Name = "Lc" + i,
-                        Font = new Font("Microsoft Sans Serif", 18),
-                        AutoSize = true,
-                        ForeColor = Color.MediumSlateBlue
-                    };
-                    Controls.Add(LabelGenerate);
-                }
-                else
-                {
-                    if ((i - 1) % 10 >= 2 && (i - 1) % 10 <= 4)
-                    {
-                        Label LabelGenerate = new Label()
-                        {
-                            Text = Convert.ToInt32(i - 1) + "  предмета",
-                            Location = new Point(130, y + 4),
-                            TabIndex = 11,
-                            Name = "Lc" + i,
-                            Font = new Font("Microsoft Sans Serif", 18),
-                            AutoSize = true,
-                            ForeColor = Color.MediumSlateBlue
-                        };
-                        Controls.Add(LabelGenerate);
-                    }
-                }
+                postfix = "предметов";
             }
-            Label LabelCreated = new Label()
+
+            Label labelFormula = new Label()
             {
-                Text = "",
-                Location = new Point(900, y + 8),
+                Text = Convert.ToInt32(currentIndex) + " " + postfix,
+                Location = new Point(130, currentTop + 4),
+                TabIndex = 11,
+                Name = "LcItogo",
+                Font = new Font("Microsoft Sans Serif", 18),
+                AutoSize = true,
+                ForeColor = Color.MediumSlateBlue
+            };
+            Controls.Add(labelFormula);
+
+
+            TotalOcSum = 0;
+            for (int b = 1; b <= currentIndex; b++)
+            {
+                System.Windows.Forms.Label labelRewardInline = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + b, true)[0];
+
+                TotalOcSum += Int32.Parse(labelRewardInline.Text);
+                Debug.WriteLine(TotalOcSum);
+            }
+
+            Label labelReward = new Label()
+            {
+                Text = Convert.ToString(TotalOcSum),
+                Location = new Point(900, currentTop + 8),
                 TabIndex = 12,
-                Name = "Lctwod" + i,
+                Name = "Lctwod" + currentIndex,
                 Font = new Font("Microsoft Sans Serif", 18),
                 AutoSize = false,
                 ForeColor = Color.MediumSlateBlue,
                 Size = new Size(60, 25),
             };
-            Controls.Add(LabelCreated);
+            Controls.Add(labelReward);
             RJButton ButtonCreate = new RJButton()
             {
                 Text = "Сохранить",
-                Location = new Point(20, y + 60),
+                Location = new Point(20, currentTop + 60),
                 TabIndex = 4,
-                Name = "Bcr" + i,
+                Name = "Bcr" + currentIndex,
                 BackColor = Color.MediumSlateBlue,
                 Size = new Size(100, 30),
                 BorderRadius = 15,
@@ -303,57 +324,77 @@ namespace Типа_кликер__v1._0
             };
             Controls.Add(ButtonCreate);
             ButtonCreate.Click += new EventHandler(ButtonCreate_Click);
-            Label LabelCred = (System.Windows.Forms.Label)this.Controls.Find("Lctwod" + i, true)[0];
-            LabelCred.Text = Convert.ToString(TotalOcSum);
+            //Label LabelCred = (System.Windows.Forms.Label)this.Controls.Find("Lctwod" + currentIndex, true)[0];
+
         }
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
-            for (int b = 1; b < i; b++)
+            connection = new MySqlConnection(File.ReadAllText("DB.txt"));
+            OpenC();
+            MySqlDataAdapter DataAdapter = new MySqlDataAdapter("DELETE FROM `grades`", GetConnection());
+            SD.DataTable Table = new SD.DataTable();
+            DataAdapter.Fill(Table);
+            DataGridViewOcenki.DataSource = Table;
+            CloseC();
+            for (int b = 1; b <= currentIndex; b++)
             {
-                Number = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + b, true)[0];
-                LabelGen = (System.Windows.Forms.Label)this.Controls.Find("Lg" + b, true)[0];
-                LabelCre = (System.Windows.Forms.Label)this.Controls.Find("Lc" + b, true)[0];
-                LabelCre2 = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + b, true)[0];
-                LabelCre2.Text = Convert.ToString(TotalOcGradeSum);
+                textboxRates = (System.Windows.Forms.TextBox)this.Controls.Find("Tg" + b, true)[0];
+                labelCaption = (System.Windows.Forms.Label)this.Controls.Find("Lg" + b, true)[0];
+                labelFormula = (System.Windows.Forms.Label)this.Controls.Find("Lc" + b, true)[0];
+                labelReward = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + b, true)[0];
+                labelReward.Text = Convert.ToString(TotalOcGradeSum);
                 OpenC();
                 MySqlCommand command = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, @grades, @points)", GetConnection());
                 command.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
                 command.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
                 command.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
-                command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = LabelGen.Text;
-                command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = Number.Text;
-                command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(Number.Text));
+                command.Parameters.Add("@subject", MySqlDbType.VarChar).Value = labelCaption.Text;
+                command.Parameters.Add("@grades", MySqlDbType.VarChar).Value = textboxRates.Text;
+                command.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(Oc(textboxRates.Text));
                 command.ExecuteNonQuery();
             }
-            OpenC();
-
-            //MySqlConnection connection = GetConnection();
-
-            //MySqlCommand command1 = new MySqlCommand("SET NAMES utf8", GetConnection());
-            //command1.ExecuteNonQuery();
-
-            MySqlCommand command2 = new MySqlCommand("INSERT INTO `grades` (`year`, `quarter`, `child`, `subject`, `grades`, `points`) VALUES (@year, @quarter, @child, @subject, '', @points)", GetConnection());
-            command2.Parameters.Add("@year", MySqlDbType.VarChar).Value = TextBoxYear.Text;
-            command2.Parameters.Add("@quarter", MySqlDbType.VarChar).Value = TextBoxQuart.Text;
-            command2.Parameters.Add("@child", MySqlDbType.VarChar).Value = TextBoxNameBaby.Text;
-            command2.Parameters.Add("@subject", MySqlDbType.VarChar).Value = "ИТОГ";
-            command2.Parameters.Add("@points", MySqlDbType.VarChar).Value = Convert.ToString(TotalOcSum);
-            command2.ExecuteNonQuery();
-            MessageBox.Show("Успешно сохранено!");
         }
-
         private void ButtonYearPlus_Click(object sender, EventArgs e)
         {
             TextBoxYear.Text = Convert.ToString(Convert.ToInt32(TextBoxYear.Text) - 1);
         }
-
+        private void DataTableView_Load(object sender, EventArgs e)
+        {
+            connection = new MySqlConnection(File.ReadAllText("DB.txt"));
+            OpenC();
+            MySqlDataAdapter DataAdapter = new MySqlDataAdapter(DataInProgramm.Script, GetConnection());
+            SD.DataTable Table = new SD.DataTable();
+            DataAdapter.Fill(Table);
+            DataGridViewOcenki.DataSource = Table;
+            CloseC();
+        }
         private void ButtonYearMinus_Click(object sender, EventArgs e)
         {
             TextBoxYear.Text = Convert.ToString(Convert.ToInt32(TextBoxYear.Text) + 1);
         }
+        private void ShowOD()
+        {
+            OpenC();
+            string sql = "SElECT subject, grades, points "+
+                " FROM `grades`" + 
+                " WHERE child='" + TextBoxNameBaby.Text + "'" +
+                "   AND quarter='" + TextBoxQuart.Text + "'" +
+                "   AND year='" + TextBoxYear.Text + "'";
 
+
+            MySqlCommand command = new MySqlCommand(sql, GetConnection());
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            adapter.SelectCommand = command;
+
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            Console.Write(table.Rows);
+        }
         private void ButtonGO_Click_1(object sender, EventArgs e)
         {
+           //string[] noned = File.ReadAllText("DBR.txt").Split('\n');//
             ButtonTable.Visible = true;
             LabelAddSubject.Visible = true;
             TextBoxNameSubject.Visible = true;
@@ -365,7 +406,21 @@ namespace Типа_кликер__v1._0
             result += "          " + TextBoxNameBaby.Text + "\n";
             result += "          " + TextBoxYear.Text + "/" + TextBoxQuart.Text + "четверть" + "\n\n";
             result += "          ------------------------------------------------\n\n";
+            ShowOD();
 
+            for (int i = 0; i < DataGridViewOcenki.RowCount - 1; i++)
+            {
+                DataGridViewRow SlctRow = DataGridViewOcenki.Rows[i];
+
+                DataInProgramm.CodeDetails = SlctRow.Cells[0].Value.ToString();
+                DataInProgramm.YearDetails = SlctRow.Cells[1].Value.ToString();
+                DataInProgramm.QuarterDetails = SlctRow.Cells[2].Value.ToString();
+                DataInProgramm.ChildDetails = SlctRow.Cells[3].Value.ToString();
+                DataInProgramm.SubjectDetails = SlctRow.Cells[4].Value.ToString();
+                DataInProgramm.GradesDetails = SlctRow.Cells[5].Value.ToString();
+                DataInProgramm.PointsDetails = SlctRow.Cells[6].Value.ToString();
+                CreateRow(DataInProgramm.SubjectDetails, DataInProgramm.GradesDetails, Ocgrade(DataInProgramm.GradesDetails), DataInProgramm.PointsDetails);
+            }
         }
 
         private void ButtonQuartMinus_Click(object sender, EventArgs e)
@@ -439,13 +494,7 @@ namespace Типа_кликер__v1._0
             else
             {
                 ButtonRegOrLog.Text = DataInProgramm.UserLogin;
-                DialogResult result = MessageBox.Show("Вы уже вошли, всё равно перейти в окно авторизации?", "", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    Login LogREG = new Login();
-                    LogREG.ShowDialog();
-
-                }
+                MessageBox.Show("Вы уже вошли.", "", MessageBoxButtons.OK);
             }
         }
             private void  PictureBox1_Click(object sender, EventArgs e)
@@ -462,6 +511,62 @@ namespace Типа_кликер__v1._0
         {
             DataTableView DataViewTable = new DataTableView();
             DataViewTable.ShowDialog();
+            if (DataInProgramm.ClickDetails == "1")
+            {
+                currentTop += 42;
+                currentIndex += 1;
+                Label LabelGenerate = new Label()
+                {
+                    Text = "" + DataInProgramm.SubjectDetails,
+                    Location = new Point(20, currentTop + 5),
+                    TabIndex = 10,
+                    Name = "Lg" + currentIndex,
+                    Font = new Font("Microsoft Sans Serif", 8),
+                    AutoSize = false,
+                    Size = new Size(120, 13),
+                };
+                Controls.Add(LabelGenerate);
+                System.Windows.Forms.TextBox TextBoxGenerate = new System.Windows.Forms.TextBox()
+                {
+                    Text = "" + DataInProgramm.GradesDetails,
+                    Location = new Point(150, currentTop),
+                    TabIndex = 10,
+                    Font = new Font("Microsoft Sans Serif", 12),
+                    Name = "Tg" + currentIndex,
+                };
+                TextBoxGenerate.TextChanged += new EventHandler(TextBoxGenerate_TextChanged);
+
+                Controls.Add(TextBoxGenerate);
+                Label LabelCreate1 = new Label()
+                {
+                    Text = "",
+                    Location = new Point(260, currentTop + 8),
+                    TabIndex = 11,
+                    Name = "Lc" + currentIndex,
+                    Font = new Font("Microsoft Sans Serif", 8),
+                    AutoSize = true
+                };
+                Controls.Add(LabelCreate1);
+                Label LabelCreate2 = new Label()
+                {
+                    Text = "" + DataInProgramm.PointsDetails,
+                    Location = new Point(900, currentTop + 6),
+                    Anchor = AnchorStyles.Right | AnchorStyles.Top,
+                    TabIndex = 12,
+                    Name = "Lctwo" + currentIndex,
+                    Font = new Font("Microsoft Sans Serif", 18),
+                    AutoSize = false,
+                    Size = new Size(80, 30),
+                };
+                Controls.Add(LabelCreate2);
+
+                
+                labelFormula = (System.Windows.Forms.Label)this.Controls.Find("Lc" + currentIndex, true)[0];
+                labelReward = (System.Windows.Forms.Label)this.Controls.Find("Lctwo" + currentIndex, true)[0];
+                labelFormula.Text = Ocgrade(DataInProgramm.GradesDetails);
+                labelReward.Text = Convert.ToString(Oc(DataInProgramm.GradesDetails));
+            }
         }
+
     }
 }

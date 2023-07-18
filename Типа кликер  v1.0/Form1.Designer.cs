@@ -44,16 +44,25 @@
             this.ButtonQuartPlus = new System.Windows.Forms.Button();
             this.ButtonQuartMinus = new System.Windows.Forms.Button();
             this.PanelDecor = new System.Windows.Forms.Panel();
+            this.ButtonTable = new Типа_кликер__v1._0.RJButton();
             this.ButtonCreateFields = new Типа_кликер__v1._0.RJButton();
             this.ButtonTotal = new Типа_кликер__v1._0.RJButton();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.DataGridViewOcenki = new System.Windows.Forms.DataGridView();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quarter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.child = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Points = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ButtonRegOrLog = new Типа_кликер__v1._0.RJButton();
             this.ButtonPrint = new Типа_кликер__v1._0.RJButton();
             this.ButtonGO = new Типа_кликер__v1._0.RJButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ButtonTable = new Типа_кликер__v1._0.RJButton();
             this.PanelDecor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOcenki)).BeginInit();
             this.SuspendLayout();
             // 
             // TextBoxYear
@@ -63,6 +72,7 @@
             this.TextBoxYear.Name = "TextBoxYear";
             this.TextBoxYear.Size = new System.Drawing.Size(119, 26);
             this.TextBoxYear.TabIndex = 84;
+            this.TextBoxYear.Tag = "";
             this.TextBoxYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LabelYear
@@ -249,9 +259,30 @@
             this.PanelDecor.Controls.Add(this.ButtonTotal);
             this.PanelDecor.Location = new System.Drawing.Point(-2, 70);
             this.PanelDecor.Name = "PanelDecor";
-            this.PanelDecor.Size = new System.Drawing.Size(1040, 128);
+            this.PanelDecor.Size = new System.Drawing.Size(2905, 128);
             this.PanelDecor.TabIndex = 170;
             this.PanelDecor.Visible = false;
+            // 
+            // ButtonTable
+            // 
+            this.ButtonTable.BackColor = System.Drawing.Color.White;
+            this.ButtonTable.BackgroundColor = System.Drawing.Color.White;
+            this.ButtonTable.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.ButtonTable.BorderRadius = 15;
+            this.ButtonTable.BorderSize = 0;
+            this.ButtonTable.FlatAppearance.BorderSize = 0;
+            this.ButtonTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonTable.ForeColor = System.Drawing.Color.SlateBlue;
+            this.ButtonTable.Location = new System.Drawing.Point(899, 76);
+            this.ButtonTable.Name = "ButtonTable";
+            this.ButtonTable.Size = new System.Drawing.Size(125, 30);
+            this.ButtonTable.TabIndex = 168;
+            this.ButtonTable.Text = "Таблица";
+            this.ButtonTable.TextColor = System.Drawing.Color.SlateBlue;
+            this.ButtonTable.UseVisualStyleBackColor = false;
+            this.ButtonTable.Visible = false;
+            this.ButtonTable.Click += new System.EventHandler(this.ButtonTable_Click);
             // 
             // ButtonCreateFields
             // 
@@ -294,6 +325,78 @@
             this.ButtonTotal.UseVisualStyleBackColor = false;
             this.ButtonTotal.Visible = false;
             this.ButtonTotal.Click += new System.EventHandler(this.ButtonTotal_Click_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Image = global::Типа_кликер__v1._0.Properties.Resources.Шестеренка__1_;
+            this.pictureBox1.Location = new System.Drawing.Point(2847, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 174;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            // 
+            // DataGridViewOcenki
+            // 
+            this.DataGridViewOcenki.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewOcenki.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.code,
+            this.year,
+            this.quarter,
+            this.child,
+            this.Subject,
+            this.Grades,
+            this.Points});
+            this.DataGridViewOcenki.Location = new System.Drawing.Point(988, 554);
+            this.DataGridViewOcenki.Name = "DataGridViewOcenki";
+            this.DataGridViewOcenki.Size = new System.Drawing.Size(795, 247);
+            this.DataGridViewOcenki.TabIndex = 175;
+            this.DataGridViewOcenki.Visible = false;
+            // 
+            // code
+            // 
+            this.code.DataPropertyName = "code";
+            this.code.HeaderText = "Код";
+            this.code.Name = "code";
+            // 
+            // year
+            // 
+            this.year.DataPropertyName = "year";
+            this.year.HeaderText = "Год";
+            this.year.Name = "year";
+            // 
+            // quarter
+            // 
+            this.quarter.DataPropertyName = "quarter";
+            this.quarter.HeaderText = "Четверть";
+            this.quarter.Name = "quarter";
+            // 
+            // child
+            // 
+            this.child.DataPropertyName = "child";
+            this.child.HeaderText = "Ребёнок";
+            this.child.Name = "child";
+            // 
+            // Subject
+            // 
+            this.Subject.DataPropertyName = "subject";
+            this.Subject.HeaderText = "Предмет";
+            this.Subject.Name = "Subject";
+            // 
+            // Grades
+            // 
+            this.Grades.DataPropertyName = "grades";
+            this.Grades.HeaderText = "Оценки";
+            this.Grades.Name = "Grades";
+            // 
+            // Points
+            // 
+            this.Points.DataPropertyName = "points";
+            this.Points.HeaderText = "Бонус";
+            this.Points.Name = "Points";
             // 
             // ButtonRegOrLog
             // 
@@ -355,46 +458,13 @@
             this.ButtonGO.UseVisualStyleBackColor = false;
             this.ButtonGO.Click += new System.EventHandler(this.ButtonGO_Click_1);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = global::Типа_кликер__v1._0.Properties.Resources.Шестеренка__1_;
-            this.pictureBox1.Location = new System.Drawing.Point(982, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 174;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
-            // 
-            // ButtonTable
-            // 
-            this.ButtonTable.BackColor = System.Drawing.Color.White;
-            this.ButtonTable.BackgroundColor = System.Drawing.Color.White;
-            this.ButtonTable.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.ButtonTable.BorderRadius = 15;
-            this.ButtonTable.BorderSize = 0;
-            this.ButtonTable.FlatAppearance.BorderSize = 0;
-            this.ButtonTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonTable.ForeColor = System.Drawing.Color.SlateBlue;
-            this.ButtonTable.Location = new System.Drawing.Point(899, 76);
-            this.ButtonTable.Name = "ButtonTable";
-            this.ButtonTable.Size = new System.Drawing.Size(125, 30);
-            this.ButtonTable.TabIndex = 168;
-            this.ButtonTable.Text = "Таблица";
-            this.ButtonTable.TextColor = System.Drawing.Color.SlateBlue;
-            this.ButtonTable.UseVisualStyleBackColor = false;
-            this.ButtonTable.Visible = false;
-            this.ButtonTable.Click += new System.EventHandler(this.ButtonTable_Click);
-            // 
             // Grades_Scoring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1038, 686);
+            this.ClientSize = new System.Drawing.Size(1038, 720);
+            this.Controls.Add(this.DataGridViewOcenki);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ButtonRegOrLog);
             this.Controls.Add(this.ButtonPrint);
@@ -412,8 +482,10 @@
             this.Controls.Add(this.TextBoxYear);
             this.Name = "Grades_Scoring";
             this.Text = "Grades_Scoring";
+            this.Load += new System.EventHandler(this.DataTableView_Load);
             this.PanelDecor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOcenki)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,6 +516,14 @@
         private RJButton ButtonRegOrLog;
         private System.Windows.Forms.PictureBox pictureBox1;
         private RJButton ButtonTable;
+        private System.Windows.Forms.DataGridView DataGridViewOcenki;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn year;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quarter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn child;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Grades;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Points;
     }
 }
 
