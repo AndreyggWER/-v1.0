@@ -433,7 +433,7 @@ namespace Типа_кликер__v1._0
             }
         }
         private void TextBoxQuart_TextChanged(object sender, EventArgs e)
-        {
+        { 
             try
             {
                 Convert.ToInt32(TextBoxQuart.Text);
